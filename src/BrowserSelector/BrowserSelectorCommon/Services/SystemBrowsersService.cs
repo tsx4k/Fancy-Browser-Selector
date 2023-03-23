@@ -60,6 +60,7 @@ namespace BrowserSelectorCommon.Services
                 if (regKey != null) 
                 {
                     regKey.GetSubKeyNames().ToList().ForEach(name => {
+                            var URLassoc = Registry.CurrentUser.OpenSubKey(REG_PATH + name + "\\Capabilities\\URLAssociations")?.GetValue("http") as string;
                             var browser = new Browser() 
                             {
                                 Name = Registry.CurrentUser.OpenSubKey(REG_PATH + name)?.GetValue(string.Empty) as string,
@@ -68,6 +69,7 @@ namespace BrowserSelectorCommon.Services
                                 ExecutablePath = Registry.CurrentUser.OpenSubKey(REG_PATH + name + "\\shell\\open\\command")?.GetValue(string.Empty) as string,
                                 RegistryPath = REG_PATH + name,
                             };
+                            browser.ExecutablePath = FixExecutablePath(URLassoc, browser.ExecutablePath);
                             if (!browsersList.Exists(x => x.Name == browser.Name) && !browser.RegistryPath.Contains(BrowserSelectorCommon.Common.AppId))
                             {
                                 browsersList.Add(browser);
@@ -86,6 +88,7 @@ namespace BrowserSelectorCommon.Services
                 if (regKey != null)
                 {
                     regKey.GetSubKeyNames().ToList().ForEach(name => {
+                        var URLassoc = Registry.LocalMachine.OpenSubKey(REG_PATH + name + "\\Capabilities\\URLAssociations")?.GetValue("http") as string;
                         var browser = new Browser()
                         {
                             Name = Registry.LocalMachine.OpenSubKey(REG_PATH + name)?.GetValue(string.Empty) as string,
@@ -94,6 +97,7 @@ namespace BrowserSelectorCommon.Services
                             ExecutablePath = Registry.LocalMachine.OpenSubKey(REG_PATH + name + "\\shell\\open\\command")?.GetValue(string.Empty) as string,
                             RegistryPath = REG_PATH + name,
                         };
+                        browser.ExecutablePath = FixExecutablePath(URLassoc, browser.ExecutablePath);
                         if (!browsersList.Exists(x => x.Name == browser.Name))
                         {
                             browsersList.Add(browser);
@@ -116,6 +120,19 @@ namespace BrowserSelectorCommon.Services
             });
 
             return browsersList;
+        }
+
+        private static string FixExecutablePath(string appId, string executablePath)
+        {
+            // Firefoxes cannot handle an extra long URL links and they have special registry for command
+            // HKEY_CLASSES_ROOT\FirefoxURL-6F193CCC56814779\shell\open\command => "C:\Program Files\Firefox Nightly\firefox.exe" -osint -url "%1"
+            try
+            {
+                var appPath = Registry.ClassesRoot.OpenSubKey(string.Format("{0}\\shell\\open\\command", appId));
+                return (string)appPath?.GetValue(string.Empty, string.Empty);
+            }
+            catch { }
+            return executablePath;
         }
 
         private static string LoadComment(IBrowser x)
