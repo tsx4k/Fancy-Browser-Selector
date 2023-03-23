@@ -1,0 +1,139 @@
+﻿<!--
+MIT Creator Revision License v1.0 (MITCRL1.0)
+
+Copyright (c) 2023 Tomasz Szynkar (tsx4k [TSX], tszynkar@tlen.pl, https://github.com/tsx4k)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute copies of the Software
+and to permit persons to whom the Software is furnished to do so, 
+subject to the following conditions:
+
+1. The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+2. There are no permissions, and/or no rights to fork, make similar Software,
+sublicense, and/or sell copies of the Software, and/or any part of it.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.  
+-->
+<ui:UiWindow x:Class="BrowserSelector.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BrowserSelector"
+        xmlns:views="clr-namespace:BrowserSelector.Views"
+        xmlns:vm="clr-namespace:BrowserSelector.ViewModels"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        SnapsToDevicePixels="True"
+        mc:Ignorable="d"
+        Background="Black"
+        Topmost="True"
+        d:DataContext="{d:DesignInstance vm:MainWindowViewModel,
+                                     IsDesignTimeCreatable=True}"
+        Title="{Binding Title, Mode=OneWay}" Height="450" Width="600">
+    <Window.Resources>
+        <local:PercentToBrushConverter x:Key="PercentToBrushConverter"/>
+        <local:PercentToAngleConverter x:Key="PercentToAngleConverter"/>
+        <local:BooleanToBrushConverter x:Key="BooleanToBrushConverter"/>
+    </Window.Resources>
+    <Grid>
+        <DockPanel Margin="20" LastChildFill="False">
+            <DockPanel Margin="0,0,0,20" DockPanel.Dock="Top">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="\Resources\Logo.png" VerticalAlignment="Center" Width="40" Height="40" RenderOptions.BitmapScalingMode="Fant" />
+                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="20,0,0,0"></TextBlock>
+                    </StackPanel>
+                    <Rectangle Margin="0,10" Stroke="{DynamicResource ControlFillColorSecondaryBrush}" HorizontalAlignment="Stretch" Height="1" StrokeThickness="1"/>
+                </StackPanel>
+
+            </DockPanel>
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                <StackPanel Orientation="Horizontal">
+                <Canvas Width="120" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <ui:Arc EndAngle="1" StartAngle="360" Stroke="{DynamicResource ControlFillColorSecondaryBrush}" StrokeThickness="10" Width="100" Height="100" />
+                        <ui:Arc EndAngle="{Binding Percent, Converter={StaticResource PercentToAngleConverter}, ConverterParameter='EndAngle', Mode=OneWay}" StartAngle="{Binding Percent, Converter={StaticResource PercentToAngleConverter}, ConverterParameter='StartAngle', Mode=OneWay}" Stroke="{Binding Percent, Converter={StaticResource PercentToBrushConverter}, ConverterParameter='Lime,Red'}" StrokeThickness="10" Width="100" Height="100" RenderTransformOrigin=".5,.5">
+                        <ui:Arc.LayoutTransform>
+                            <RotateTransform Angle="0" />
+                        </ui:Arc.LayoutTransform>
+                    </ui:Arc>
+                </Canvas>
+                <Grid Margin="20,5,0,0" Height="120" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    
+                        <Rectangle Grid.Column="0" Grid.Row="0" Fill="{Binding IsRegistered, Converter={StaticResource BooleanToBrushConverter}, ConverterParameter='Lime,Red'}" Width="32" Height="32" VerticalAlignment="Top" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" TextWrapping="WrapWithOverflow" Text="Step 1. Register FBS as an available Web Browser" VerticalAlignment="Top" Margin="20,0,0,0" />
+                        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0" VerticalAlignment="Top" Margin="20,0,0,0">
+                            <ui:Button Cursor="Hand" Content="Register" Command="{Binding RegisterAsBrowserCommand}"  />
+                            <ui:Button Cursor="Hand" Content="Unregister" Command="{Binding UnRegisterAsBrowserCommand}" Margin="10,0,0,0" />
+                        </StackPanel>
+
+                        <Rectangle Grid.Column="0" Grid.Row="1" Fill="{Binding IsDefault, Converter={StaticResource BooleanToBrushConverter}, ConverterParameter='Lime,Red'}" Width="32" Height="32" VerticalAlignment="Top" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="WrapWithOverflow" Text="Step 2. Select FBS as Default Web Browser" VerticalAlignment="Top" Margin="20,0,0,0" />
+                        <ui:Button Cursor="Hand" Grid.Column="2" Grid.Row="1" Content="Open Windows Settings" Command="{Binding OpenSettingsCommand}" VerticalAlignment="Top" Margin="20,0,0,0" />
+                </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,15,0,0">
+                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                    <TextBlock HorizontalAlignment="Right" ToolTip="Buy me a Coffee ☕">
+                            <Hyperlink local:HyperlinkExtension.IsExternal="true" NavigateUri="{Binding DataContext.SupportUrl, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" TextDecorations="None">
+                                <TextBlock FontSize="12" Text="{Binding DataContext.About, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="False">
+                                                <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                                </TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                    <TextBlock HorizontalAlignment="Right" ToolTip="https://github.com/tsx4k/Fancy-Browser-Selector">
+                            <Hyperlink local:HyperlinkExtension.IsExternal="true" NavigateUri="{Binding DataContext.AboutUrl, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" TextDecorations="None">
+                                <TextBlock FontSize="10" Text="{Binding DataContext.Version, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="False">
+                                                <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                                </TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                        </StackPanel>
+                        <Image Margin="10,0,0,0" Source="\Resources\tsx4k_bmc_qr.png" Width="100" Height="100" HorizontalAlignment="Right" />
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</ui:UiWindow>
