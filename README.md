@@ -28,9 +28,9 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 
 <div align="center" style="display:flex;flex-direction:column;">
   <p align="center">
-<a href="https://github.com/sponsors/tsx4k" target="_blank"><b>Become a GitHub Sponsor</b></br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/github-sponsors.png" "style=" height: 54px;" height="54" /></a>
+<a href="https://github.com/sponsors/tsx4k" target="_blank"><b>Become a GitHub Sponsor</b></br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/github-sponsors.png" style="height: 54px;" height="54" /></a>
 <br /><br />
-<a href="https://www.buymeacoffee.com/tsx4k" target="_blank"><b>Buy Me A Coffee</b><br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/buymeacoffee_qrcode.png" "style=" height: 54px;" height="54" /></a>
+<a href="https://www.buymeacoffee.com/tsx4k" target="_blank"><b>Buy Me A Coffee</b><br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/buymeacoffee_qrcode.png" style="height: 184px;" height="184" /></a>
 </p>
 </div>
 
