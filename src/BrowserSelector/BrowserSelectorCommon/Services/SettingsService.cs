@@ -24,70 +24,65 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-using BrowserSelector.ViewModels;
 using BrowserSelectorCommon.Interfaces;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Wpf.Ui.Controls.Window;
 
-namespace BrowserSelector.Views
+namespace BrowserSelectorCommon.Services
 {
-    /// <summary>
-    /// Interaction logic for EditCommentWindow.xaml
-    /// </summary>
-    public partial class EditCommentWindow : FluentWindow
+    internal class SettingsService
     {
-        public string Comment { get; set; }
-
-        public EditCommentWindow(IBrowser browser)
+        public static string GetTheme(string appId)
         {
-            InitializeComponent();
-            DataContext = new EditCommentWindowViewModel(browser, this);
-        }
-
-        private void UiWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void UiWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if(DialogResult == true)
+            try
             {
-                Comment = txbComment.Text;
+                var appPath = Registry.CurrentUser.CreateSubKey(string.Format("SOFTWARE\\{0}\\Settings", appId));
+                return (string)appPath?.GetValue($"Theme", string.Empty);
             }
+            catch { }
+            return null;
         }
 
-        private void UiWindow_KeyUp(object sender, KeyEventArgs e)
+        public static bool SetTheme(string appId, string newTheme)
         {
-            if(e.Key == Key.Enter)
+            try
             {
-                DialogResult = true;
-                Close();
-            } else 
-            if(e.Key == Key.Escape)
-            {
-                DialogResult = false;
-                Close();
+                var appPath = Registry.CurrentUser.CreateSubKey(string.Format("SOFTWARE\\{0}\\Settings", appId));
+                appPath?.SetValue($"Theme", newTheme);
+                return true;
             }
+            catch { }
+            return false;
         }
 
-        private void UiWindow_Activated(object sender, EventArgs e)
+        // TODO: Typed Settings
+
+        public static string GetSetting(string appId, string settingId)
         {
-            txbComment.Focus();
-            txbComment.SelectionStart = txbComment.Text.Length;
+            try
+            {
+                var appPath = Registry.CurrentUser.CreateSubKey(string.Format("SOFTWARE\\{0}\\Settings", appId));
+                return (string)appPath?.GetValue($"_{settingId}", null);
+            }
+            catch { }
+            return null;
         }
+
+        public static bool SetSetting(string appId, string settingId, string newValue)
+        {
+            try
+            {
+                var appPath = Registry.CurrentUser.CreateSubKey(string.Format("SOFTWARE\\{0}\\Settings", appId));
+                appPath?.SetValue($"_{settingId}", newValue);
+                return true;
+            }
+            catch { }
+            return false;
+        }
+
     }
 }

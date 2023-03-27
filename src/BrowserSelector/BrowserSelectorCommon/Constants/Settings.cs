@@ -24,62 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-using BrowserSelector.ViewModels;
-using BrowserSelectorCommon.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Wpf.Ui.Controls.Window;
 
-namespace BrowserSelector.Views
+namespace BrowserSelectorCommon.Constants
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : FluentWindow
+    public class Settings
     {
-        MainWindowViewModel model;
-
-        public MainWindow()
-        {
-            Wpf.Ui.Appearance.Watcher.Watch(this);
-
-            InitializeComponent();
-            model = new MainWindowViewModel();
-            model.ApplyTheme();
-            DataContext = model;
-        }
-
-        private void UiWindow_Activated(object sender, EventArgs e)
-        {
-            model.ApplyTheme();
-        }
-
-        private void UiWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void UiWindow_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape || e.Key == Key.Enter)
-            {
-                Close();
-            }
-        }
+        public static readonly string SETTING_USE_SINGLE_CLICK = "UseSingleClick";
+        public static readonly string SETTING_LEARN_HOSTS = "LearnHosts";
+        public static readonly string SETTING_LEARN_HOSTS_SAFELINK = "LearnHostsSafeLink";
+        public static readonly string SETTING_STRIP_SAFELINKS = "StripSafeLinks";
     }
 }

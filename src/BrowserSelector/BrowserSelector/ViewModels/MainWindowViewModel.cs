@@ -35,6 +35,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Wpf.Ui.Appearance;
 
 namespace BrowserSelector.ViewModels
 {
@@ -42,7 +43,7 @@ namespace BrowserSelector.ViewModels
     {
         DispatcherTimer timer = new DispatcherTimer();
 
-        public string Title => $"{BrowserSelectorCommon.Common.AppName}";
+        public string Title => $"{BrowserSelectorCommon.Common.AppName} Settings";
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -67,6 +68,50 @@ namespace BrowserSelector.ViewModels
         public bool IsSetupCompleted { get { return isSetupCompleted; } set { if (isSetupCompleted != value) { isSetupCompleted = value; OnPropertyChanged("IsSetupCompleted"); } } }
 
         private bool isAutoRegisterEnabled = true;
+
+        public List<Wpf.Ui.Appearance.ThemeType> Themes => new List<Wpf.Ui.Appearance.ThemeType>() { Wpf.Ui.Appearance.ThemeType.Light, Wpf.Ui.Appearance.ThemeType.Dark };
+
+        private Wpf.Ui.Appearance.ThemeType currentTheme;
+        public Wpf.Ui.Appearance.ThemeType CurrentTheme { get { return currentTheme; } set { currentTheme = value; OnPropertyChanged("CurrentTheme"); ApplyTheme(value); } }
+
+
+        private bool settingUseSingleClick = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_USE_SINGLE_CLICK) ?? "false");
+        public bool SettingUseSingleClick { get { return settingUseSingleClick; } set { settingUseSingleClick = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_USE_SINGLE_CLICK, value.ToString()); OnPropertyChanged("SettingUseSingleClick"); } }
+
+        private bool settingLearnHosts = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS) ?? "false");
+        public bool SettingLearnHosts { get { return settingLearnHosts; } set { settingLearnHosts = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS, value.ToString()); OnPropertyChanged("SettingLearnHosts"); } }
+
+        private bool settingLearnHostsSafeLink = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS_SAFELINK) ?? "false");
+        public bool SettingLearnHostsSafeLink { get { return settingLearnHostsSafeLink; } set { settingLearnHostsSafeLink = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS_SAFELINK, value.ToString()); OnPropertyChanged("SettingLearnHostsSafeLink"); } }
+
+        private bool settingStripSafeLinks = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_STRIP_SAFELINKS) ?? "false");
+        public bool SettingStripSafeLinks { get { return settingStripSafeLinks; } set { settingStripSafeLinks = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_STRIP_SAFELINKS, value.ToString()); OnPropertyChanged("SettingStripSafeLinks"); } }
+
+
+        private void SetSetting(string key, string value)
+        {
+            BrowserSelectorCommon.Common.SetSetting(key, value);
+        }
+
+        private void ApplyTheme(Wpf.Ui.Appearance.ThemeType newTheme)
+        {
+            Wpf.Ui.Appearance.Theme.Apply(newTheme);
+            BrowserSelectorCommon.Common.SetTheme(newTheme.ToString());
+        }
+
+        public void ApplyTheme()
+        {
+            // apply theme from settings (if any)
+            string theme = BrowserSelectorCommon.Common.GetTheme();
+            if (!string.IsNullOrEmpty(theme))
+            {
+                if (Enum.TryParse(theme, out Wpf.Ui.Appearance.ThemeType appTheme))
+                {
+                    CurrentTheme = appTheme;
+                }
+            }
+        }
+
 
         public MainWindowViewModel() 
         {

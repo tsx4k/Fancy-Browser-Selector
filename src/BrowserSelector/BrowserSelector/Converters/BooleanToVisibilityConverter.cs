@@ -24,62 +24,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-using BrowserSelector.ViewModels;
-using BrowserSelectorCommon.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Wpf.Ui.Controls.Window;
 
-namespace BrowserSelector.Views
+namespace BrowserSelector
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : FluentWindow
+    internal class BooleanToVisibilityConverter : IValueConverter
     {
-        MainWindowViewModel model;
-
-        public MainWindow()
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Wpf.Ui.Appearance.Watcher.Watch(this);
+            var val = (bool)value;
+            var param = (string)parameter;
 
-            InitializeComponent();
-            model = new MainWindowViewModel();
-            model.ApplyTheme();
-            DataContext = model;
+            return val ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        private void UiWindow_Activated(object sender, EventArgs e)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            model.ApplyTheme();
-        }
-
-        private void UiWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void UiWindow_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape || e.Key == Key.Enter)
-            {
-                Close();
-            }
+            return null;
         }
     }
 }

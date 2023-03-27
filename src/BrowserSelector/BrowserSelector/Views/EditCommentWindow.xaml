@@ -23,7 +23,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.  
 -->
-<ui:UiWindow x:Class="BrowserSelector.Views.EditCommentWindow"
+<ui:FluentWindow x:Class="BrowserSelector.Views.EditCommentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -59,4 +59,4 @@ SOFTWARE.
             </StackPanel>
         </DockPanel>
     </Grid>
-</ui:UiWindow>
+</ui:FluentWindow>

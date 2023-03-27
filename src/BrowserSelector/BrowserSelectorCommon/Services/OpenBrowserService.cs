@@ -39,18 +39,20 @@ namespace BrowserSelectorCommon.Services
     {
         internal static void Open(IBrowser browser, string url)
         {
-
             var path = browser.ExecutablePath;
-            var args = $"\"{url}\"";
-            if (path.Contains("%1"))
+            if (path != null)
             {
-                // e.g.: "C:\Program Files\Firefox Nightly\firefox.exe" -osint -url "%1"
-                path = path.Replace("%1", url);
-                ProcessService.CreateProcessFromCommandLine(path);
-            }
-            else
-            {
-                ProcessService.StartProcess(path, args);
+                var args = $"\"{url}\"";
+                if (path.Contains("%1"))
+                {
+                    // e.g.: "C:\Program Files\Firefox Nightly\firefox.exe" -osint -url "%1"
+                    path = path.Replace("%1", url);
+                    ProcessService.CreateProcessFromCommandLine(path);
+                }
+                else
+                {
+                    ProcessService.StartProcess(path, args);
+                }
             }
         }
     }

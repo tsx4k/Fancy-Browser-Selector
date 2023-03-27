@@ -25,6 +25,7 @@ SOFTWARE.
 
 */
 using BrowserSelectorCommon.Interfaces;
+using BrowserSelectorCommon.Models;
 using BrowserSelectorCommon.Services;
 using Microsoft.Win32;
 using System;
@@ -64,7 +65,23 @@ namespace BrowserSelectorCommon
 
         public static void OpenBrowser(IBrowser browser, string url)
         {
+            if(bool.Parse(GetSetting(Constants.Settings.SETTING_LEARN_HOSTS) ?? "false"))
+            {
+                if(bool.Parse(GetSetting(Constants.Settings.SETTING_LEARN_HOSTS_SAFELINK) ?? "false") && IsSafeLink(url, out string originalUrl))
+                {
+                    LearnService.LearnHost(AppId, browser, originalUrl);
+                }
+                else
+                {
+                    LearnService.LearnHost(AppId, browser, url);
+                }
+            }
             OpenBrowserService.Open(browser, url);
+        }
+
+        public static void OpenUrl(string url)
+        {
+            ProcessService.StartProcess(url, string.Empty);
         }
 
         public static void OpenSystemSettings()
@@ -106,6 +123,35 @@ namespace BrowserSelectorCommon
             return SystemBrowsersService.SetLastSelectedBrowser(AppId, progId);
         }
 
+        public static bool IsSafeLink(string url, out string originalUrl)
+        {
+            return SafeLinksService.IsSafeLink(url, out originalUrl);
+        }
+
+        public static bool SetTheme(string newTheme)
+        {
+            return SettingsService.SetTheme(AppId, newTheme);
+        }
+
+        public static string GetTheme()
+        {
+            return SettingsService.GetTheme(AppId);
+        }
+
+        public static string GetSetting(string settingId)
+        {
+            return SettingsService.GetSetting(AppId, settingId);
+        }
+
+        public static bool SetSetting(string settingId, string newValue)
+        {
+            return SettingsService.SetSetting(AppId, settingId, newValue);
+        }
+
+        public static string GetLearning(string url)
+        {
+            return LearnService.MatchHost(AppId, url);
+        }
 
     }
 }
