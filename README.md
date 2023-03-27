@@ -21,6 +21,7 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 - Learning capability for better experience, it will think and work for you!
 - Extra Comment field for each browser that will help you identify your sessions
 - A Protection with ability to see the Web address before any browser will navigate
+- Integration with System colors on Windows 10 and Windows 11 e.g. an Accent Color
 - User-friendly Interface
 - Light/Dark Mode
 
