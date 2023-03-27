@@ -24,6 +24,21 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 - User-friendly Interface
 - Light/Dark Mode
 
+## ⚡️ Screenshots
+
+<div align="center" style="display:flex;flex-direction:column;">
+  <p align="center">
+<a href="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Light_Screen1.png" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Light_Screen1.png" border=0 width=300 />
+<a href="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Light_Screen2.png" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Light_Screen2.png" border=0 width=300 />
+<a href="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Light_Screen3.png" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Light_Screen3.png" border=0 width=300 />
+
+<a href="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Dark_Screen1.png" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Dark_Screen1.png" border=0 width=300 />
+<a href="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Dark_Screen2.png" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Dark_Screen2.png" border=0 width=300 />
+<a href="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Dark_Screen3.png" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/Dark_Screen3.png" border=0 width=300 />
+
+</p>
+</div>
+
 ## ⚡️ Support
 
 <div align="center" style="display:flex;flex-direction:column;">
