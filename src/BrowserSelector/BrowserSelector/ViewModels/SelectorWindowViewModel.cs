@@ -59,7 +59,14 @@ namespace BrowserSelector.ViewModels
 
         public string Title => $"{BrowserSelectorCommon.Common.AppName}";
 
-        public string URL { get; set; }
+        private string _url = null;
+        public string URL { get { return _url; } set { _url = value; OnPropertyChanged("URL"); } }
+
+        private string _originalUrl = null;
+        public string OriginalURL { get { return _originalUrl; } set { _originalUrl = value; OnPropertyChanged("OriginalURL"); } }
+
+        private bool _urlIsStripped = false;
+        public bool UrlIsStripped { get { return _urlIsStripped; } set { _urlIsStripped = value; OnPropertyChanged("UrlIsStripped"); } }
 
         public ICommand OpenBrowserCommand { get; private set; }
         public ICommand CopyToClipboardCommand { get; private set; }
@@ -68,17 +75,6 @@ namespace BrowserSelector.ViewModels
         public ICommand SettingsCommand { get; private set; }
 
         public Window Window { get; set; }
-
-        public SelectorWindowViewModel() 
-        {
-            OpenBrowserCommand = new RelayCommand(((SelectorWindow)Window).OpenBrowser);
-            CopyToClipboardCommand = new RelayCommand(CopyToClipboard);
-            CloseCommand = new RelayCommand(Close);
-            EditCommentCommand = new RelayCommand(EditComment);
-            SettingsCommand = new RelayCommand(OpenSettings);
-
-            PrepareBrowsersList();
-        }
 
         public SelectorWindowViewModel(Window window)
         {
@@ -90,6 +86,19 @@ namespace BrowserSelector.ViewModels
             SettingsCommand = new RelayCommand(OpenSettings);
 
             PrepareBrowsersList();
+        }
+
+        public void ApplyTheme()
+        {
+            // apply theme from settings (if any)
+            string theme = BrowserSelectorCommon.Common.GetTheme();
+            if (!string.IsNullOrEmpty(theme))
+            {
+                if (Enum.TryParse(theme, out Wpf.Ui.Appearance.ThemeType appTheme))
+                {
+                    Wpf.Ui.Appearance.Theme.Apply(appTheme);
+                }
+            }
         }
 
         private void OpenSettings(object param)
@@ -139,7 +148,9 @@ namespace BrowserSelector.ViewModels
         {
             Clipboard.SetText(URL);
             var button = (Wpf.Ui.Controls.Button)param;
-            button.IconForeground = new SolidColorBrush(Colors.Lime);
+            button.Appearance = Wpf.Ui.Controls.ControlAppearance.Success;
+            button.Icon = Wpf.Ui.Common.SymbolRegular.Checkmark32;
+            button.Background = new SolidColorBrush(Colors.Green);
         }
     }
 }

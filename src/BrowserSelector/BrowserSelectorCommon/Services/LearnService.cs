@@ -24,70 +24,42 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-using BrowserSelector.ViewModels;
 using BrowserSelectorCommon.Interfaces;
+using BrowserSelectorCommon.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Wpf.Ui.Controls.Window;
 
-namespace BrowserSelector.Views
+namespace BrowserSelectorCommon.Services
 {
-    /// <summary>
-    /// Interaction logic for EditCommentWindow.xaml
-    /// </summary>
-    public partial class EditCommentWindow : FluentWindow
+    internal class LearnService
     {
-        public string Comment { get; set; }
-
-        public EditCommentWindow(IBrowser browser)
+        public static bool LearnHost(string appId, IBrowser browser, string url)
         {
-            InitializeComponent();
-            DataContext = new EditCommentWindowViewModel(browser, this);
-        }
-
-        private void UiWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void UiWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if(DialogResult == true)
+            try
             {
-                Comment = txbComment.Text;
+                var appPath = Registry.CurrentUser.CreateSubKey(string.Format("SOFTWARE\\{0}\\Learning", appId));
+                Uri uri = new Uri(url);
+                appPath?.SetValue($"{uri.Host}", browser.ProgId);
+                return true;
             }
+            catch { }
+            return false;
         }
 
-        private void UiWindow_KeyUp(object sender, KeyEventArgs e)
+        internal static string MatchHost(string appId, string url)
         {
-            if(e.Key == Key.Enter)
+            try
             {
-                DialogResult = true;
-                Close();
-            } else 
-            if(e.Key == Key.Escape)
-            {
-                DialogResult = false;
-                Close();
+                var appPath = Registry.CurrentUser.CreateSubKey(string.Format("SOFTWARE\\{0}\\Learning", appId));
+                Uri uri = new Uri(url);
+                return (string)appPath?.GetValue($"{uri.Host}", null);
             }
-        }
-
-        private void UiWindow_Activated(object sender, EventArgs e)
-        {
-            txbComment.Focus();
-            txbComment.SelectionStart = txbComment.Text.Length;
+            catch { }
+            return null;
         }
     }
 }

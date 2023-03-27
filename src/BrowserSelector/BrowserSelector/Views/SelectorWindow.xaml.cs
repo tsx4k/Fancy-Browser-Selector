@@ -38,7 +38,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.Window;
 using BrowserSelector.ViewModels;
 using BrowserSelectorCommon.Interfaces;
 using System.Security.Policy;
@@ -48,17 +48,33 @@ namespace BrowserSelector.Views
     /// <summary>
     /// Interaction logic for SelectorWindow.xaml
     /// </summary>
-    public partial class SelectorWindow : UiWindow
+    public partial class SelectorWindow : FluentWindow
     {
+        SelectorWindowViewModel model;
+
         public SelectorWindow()
         {
+            Wpf.Ui.Appearance.Watcher.Watch(this);
+
             InitializeComponent();
-            DataContext = new ViewModels.SelectorWindowViewModel(this);
+            DataContext = model = new ViewModels.SelectorWindowViewModel(this);
+            model.ApplyTheme();
         }
+
         public SelectorWindow(string url)
         {
+            Wpf.Ui.Appearance.Watcher.Watch(this);
+
             InitializeComponent();
-            DataContext = new ViewModels.SelectorWindowViewModel(this) { URL = url };
+            DataContext = model = new ViewModels.SelectorWindowViewModel(this) { URL = url, OriginalURL = url };
+            model.ApplyTheme();
+
+            this.Activated += SelectorWindow_Activated;
+        }
+
+        private void SelectorWindow_Activated(object sender, EventArgs e)
+        {
+            model.ApplyTheme();
         }
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -97,6 +113,38 @@ namespace BrowserSelector.Views
             if (lbBrowsers.SelectedIndex < 0)
             {
                 var progid = BrowserSelectorCommon.Common.GetLastSelectedBrowser();
+
+                // URL features
+                var url = ((SelectorWindowViewModel)DataContext).URL;
+                var urlForLearning = url;
+                if (BrowserSelectorCommon.Common.IsSafeLink(url, out string originalUrl))
+                {
+                    // Stripe
+                    if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_STRIP_SAFELINKS) ?? "false"))
+                    {
+                        url = originalUrl;
+                        ((SelectorWindowViewModel)DataContext).URL = url;
+                        ((SelectorWindowViewModel)DataContext).UrlIsStripped = true;
+                    }
+
+                    // Handle Safelinks for Learning
+                    if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS_SAFELINK) ?? "false"))
+                    {
+                        urlForLearning = originalUrl;
+                    }
+                }
+
+                // Get Learning
+                if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS) ?? "false"))
+                {
+                    string learnProgid = BrowserSelectorCommon.Common.GetLearning(urlForLearning);
+                    if(!string.IsNullOrEmpty(learnProgid))
+                    {
+                        progid = learnProgid;
+                    }
+                }
+
+
                 if (!string.IsNullOrEmpty(progid))
                 {
                     int index = -1;
@@ -131,6 +179,14 @@ namespace BrowserSelector.Views
                 {
                     OpenBrowser(lbBrowsers);
                 }
+            }
+        }
+
+        private void ListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if(bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_USE_SINGLE_CLICK) ?? "false"))
+            {
+                OpenBrowser(sender);
             }
         }
     }

@@ -129,7 +129,11 @@ namespace BrowserSelectorCommon.Services
             try
             {
                 var appPath = Registry.ClassesRoot.OpenSubKey(string.Format("{0}\\shell\\open\\command", appId));
-                return (string)appPath?.GetValue(string.Empty, string.Empty);
+                var newpath = (string)appPath?.GetValue(string.Empty, string.Empty);
+                if(!string.IsNullOrEmpty(newpath))
+                {
+                    return newpath;
+                }
             }
             catch { }
             return executablePath;
