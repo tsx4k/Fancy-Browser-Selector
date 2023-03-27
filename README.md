@@ -11,7 +11,7 @@
 
 Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selector app that will revolutionize the way you work with URL links on your computer, especially when you are using several browsers or you are signedin to many organisations per browser. With it's intuitive and user-friendly interface, Fancy Browser Selector makes it easy to navigate to any web address. Whether you're a developer working on a large-scale projects or a emploee of multi-organisation with multiple Teams, Boards and one browser is not enough to handle, THE FBS has the tools and features you need to unlock the full potential of your Organisation. Best of all, because Fancy Browser Selector is open-source and free, you can use it without breaking the bank. Try FBS today and experience the power of Web Links like never before.
 
-> <b><a href="https://github.com/tsx4k/Fancy-Browser-Selector/">Fancy Browser Selector - Acts Like Browser Sees Much Closer</a></b>
+<b><a href="https://github.com/tsx4k/Fancy-Browser-Selector/">Fancy Browser Selector - Acts Like Browser Sees Much Closer</a></b>
 
 ## ⚡️ Key Features
 
@@ -26,10 +26,13 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 
 ## ⚡️ Support
 
-    <a href="https://github.com/sponsors/tsx4k" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/github-sponsors.png" "style=" height: 54px;" height="54" /></a>
-<br />
-    <a href="https://www.buymeacoffee.com/tsx4k" target="_blank"><h2>Buy Me A Coffee</h2><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/buymeacoffee_qrcode.png" "style=" height: 54px;" height="54" /></a>
-
+<div align="center" style="display:flex;flex-direction:column;">
+  <p align="center">
+<a href="https://github.com/sponsors/tsx4k" target="_blank"><b>Become a GitHub Sponsor</b></br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/github-sponsors.png" "style=" height: 54px;" height="54" /></a>
+<br /><br />
+<a href="https://www.buymeacoffee.com/tsx4k" target="_blank"><b>Buy Me A Coffee</b><br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/buymeacoffee_qrcode.png" "style=" height: 54px;" height="54" /></a>
+</p>
+</div>
 
 ## License
 
