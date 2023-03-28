@@ -38,10 +38,14 @@ namespace BrowserSelectorCommon.Services
         internal static bool IsSafeLink(string url, out string originalUrl)
         {
             // https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html?url=
+            // https://eur01.safelinks.protection.outlook.com/ap/x-59584e83/?url=
             try
             {
                 Uri uri = new Uri(url);
-                if(uri.Host.ToLower().EndsWith(".office.net") && uri.AbsolutePath.Contains("/safelinks/") && uri.AbsolutePath.Contains("-safelinks.html"))
+                if(
+                    (uri.Host.ToLower().EndsWith(".office.net") && uri.AbsolutePath.Contains("/safelinks/") && uri.AbsolutePath.Contains("-safelinks.html")) ||
+                    (uri.Host.ToLower().EndsWith(".safelinks.protection.outlook.com") && uri.AbsolutePath.Contains("/ap/"))
+                    )
                 {
                     var nurl = HttpUtility.ParseQueryString(uri.Query)?.Get("url");
                     if (!string.IsNullOrEmpty(nurl))

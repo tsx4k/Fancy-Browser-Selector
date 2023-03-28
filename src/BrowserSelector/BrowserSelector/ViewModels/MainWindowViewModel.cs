@@ -71,7 +71,7 @@ namespace BrowserSelector.ViewModels
 
         public List<Wpf.Ui.Appearance.ThemeType> Themes => new List<Wpf.Ui.Appearance.ThemeType>() { Wpf.Ui.Appearance.ThemeType.Light, Wpf.Ui.Appearance.ThemeType.Dark };
 
-        private Wpf.Ui.Appearance.ThemeType currentTheme;
+        private Wpf.Ui.Appearance.ThemeType currentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
         public Wpf.Ui.Appearance.ThemeType CurrentTheme { get { return currentTheme; } set { currentTheme = value; OnPropertyChanged("CurrentTheme"); ApplyTheme(value); } }
 
 
