@@ -1,9 +1,13 @@
 <div align="center" style="display:flex;flex-direction:column;">
   <h1>Fancy Browser Selector</h1>
   <h3>“Explore, analyze, understand and handle a WebLinks for Organisations.”</br>Unlock the full potential of your sessions.</h3>
-  <p align="center">
+  <div align="center">
     <a href="https://github.com/sponsors/tsx4k" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/github-sponsors.png" "style=" height: 54px;" height="54" /></a>
-  </p>
+    <br />Or <b>Buy Me A Coffee</b><br />
+<a href="https://www.buymeacoffee.com/tsx4k" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/buymeacoffee_qrcode.png" style="height: 104px;" height="104" /></a>
+<br /><a href="https://buycoffee.to/tsx" target="_blank"><img src="https://buycoffee.to/btn/buycoffeeto-btn-primary.svg" style="width: 150px" alt="Postaw mi kawę na buycoffee.to"></a>
+
+  </div>
 </div>
 
 
@@ -47,6 +51,7 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 <a href="https://github.com/sponsors/tsx4k" target="_blank"><b>Become a GitHub Sponsor</b></br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/github-sponsors.png" style="height: 54px;" height="54" /></a>
 <br /><br />
 <a href="https://www.buymeacoffee.com/tsx4k" target="_blank"><b>Buy Me A Coffee</b><br /><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/buymeacoffee_qrcode.png" style="height: 184px;" height="184" /></a>
+<br /><br /><a href="https://buycoffee.to/tsx" target="_blank"><b>Buy Coffee To</b><br /><img src="https://buycoffee.to/btn/buycoffeeto-btn-primary.svg" style="width: 200px" alt="Postaw mi kawę na buycoffee.to"></a>
 </p>
 </div>
 
