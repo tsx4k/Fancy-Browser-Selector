@@ -44,7 +44,7 @@ namespace BrowserSelectorCommon.Services
                 Uri uri = new Uri(url);
                 if(
                     (uri.Host.ToLower().EndsWith(".office.net") && uri.AbsolutePath.Contains("/safelinks/") && uri.AbsolutePath.Contains("-safelinks.html")) ||
-                    (uri.Host.ToLower().EndsWith(".safelinks.protection.outlook.com") && uri.AbsolutePath.Contains("/ap/"))
+                    (uri.Host.ToLower().EndsWith(".safelinks.protection.outlook.com"))
                     )
                 {
                     var nurl = HttpUtility.ParseQueryString(uri.Query)?.Get("url");
