@@ -38,5 +38,6 @@ namespace BrowserSelectorCommon.Constants
         public static readonly string SETTING_LEARN_HOSTS = "LearnHosts";
         public static readonly string SETTING_LEARN_HOSTS_SAFELINK = "LearnHostsSafeLink";
         public static readonly string SETTING_STRIP_SAFELINKS = "StripSafeLinks";
+        public static readonly string SETTING_LOAD_BROWSER_PROFILES = "LoadBrowserProfiles";
     }
 }

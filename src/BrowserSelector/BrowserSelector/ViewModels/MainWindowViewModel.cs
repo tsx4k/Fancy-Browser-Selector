@@ -87,6 +87,9 @@ namespace BrowserSelector.ViewModels
         private bool settingStripSafeLinks = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_STRIP_SAFELINKS) ?? "false");
         public bool SettingStripSafeLinks { get { return settingStripSafeLinks; } set { settingStripSafeLinks = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_STRIP_SAFELINKS, value.ToString()); OnPropertyChanged("SettingStripSafeLinks"); } }
 
+        private bool settingLoadBrowserProfiles = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LOAD_BROWSER_PROFILES) ?? "false");
+        public bool SettingLoadBrowserProfiles { get { return settingLoadBrowserProfiles; } set { settingLoadBrowserProfiles = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LOAD_BROWSER_PROFILES, value.ToString()); OnPropertyChanged("SettingLoadBrowserProfiles"); } }
+
 
         private void SetSetting(string key, string value)
         {

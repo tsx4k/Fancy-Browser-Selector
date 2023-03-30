@@ -55,6 +55,7 @@
     <Compile Include="Models\Browser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BrowserExtensions\BraveService.cs" />
+    <Compile Include="Services\BrowserExtensions\ChromeService.cs" />
     <Compile Include="Services\LearnService.cs" />
     <Compile Include="Services\CommentsService.cs" />
     <Compile Include="Services\FileIconService.cs" />
