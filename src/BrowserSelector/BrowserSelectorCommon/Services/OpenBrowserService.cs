@@ -42,7 +42,7 @@ namespace BrowserSelectorCommon.Services
             var path = browser.ExecutablePath;
             if (path != null)
             {
-                var args = $"\"{url}\"";
+                var args = $"{browser.ExecutableArgs} \"{url}\"".Trim();
                 if (path.Contains("%1"))
                 {
                     // e.g.: "C:\Program Files\Firefox Nightly\firefox.exe" -osint -url "%1"

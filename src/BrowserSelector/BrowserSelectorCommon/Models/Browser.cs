@@ -41,6 +41,7 @@ namespace BrowserSelectorCommon.Models
         public string ProgId { get; set; }
         public string IconPath { get; set; }
         public string ExecutablePath { get; set; }
+        public string ExecutableArgs { get; set; }
         public string RegistryPath { get; set; }
         public BitmapImage Icon { get; set; }
         public string Comment { get; set; }

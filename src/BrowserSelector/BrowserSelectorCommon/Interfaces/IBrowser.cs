@@ -39,6 +39,7 @@ namespace BrowserSelectorCommon.Interfaces
         string ProgId { get; set; }
         string IconPath { get; set; }
         string ExecutablePath { get; set; }
+        string ExecutableArgs { get; set; }
         string RegistryPath { get; set; }
         BitmapImage Icon { get; set; }
         string Comment { get; set; }

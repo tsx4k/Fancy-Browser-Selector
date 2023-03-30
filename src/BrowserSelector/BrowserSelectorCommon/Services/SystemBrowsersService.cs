@@ -26,6 +26,7 @@ SOFTWARE.
 */
 using BrowserSelectorCommon.Interfaces;
 using BrowserSelectorCommon.Models;
+using BrowserSelectorCommon.Services.BrowserExtensions;
 using Microsoft.Win32;
 using System;
 using System.CodeDom;
@@ -69,12 +70,16 @@ namespace BrowserSelectorCommon.Services
                                 ExecutablePath = Registry.CurrentUser.OpenSubKey(REG_PATH + name + "\\shell\\open\\command")?.GetValue(string.Empty) as string,
                                 RegistryPath = REG_PATH + name,
                             };
-                            browser.ExecutablePath = FixExecutablePath(URLassoc, browser.ExecutablePath);
-                            if (!browsersList.Exists(x => x.Name == browser.Name) && !browser.RegistryPath.Contains(BrowserSelectorCommon.Common.AppId))
+                            //browser.ExecutablePath = FixExecutablePath(URLassoc, browser.ExecutablePath);
+                            List<IBrowser> browserProfiles = GrabProfiles(browser);
+                            foreach (var browserProfile in browserProfiles)
                             {
-                                browsersList.Add(browser);
+                                if (!browsersList.Exists(x => x.Name == browserProfile.Name) && !browserProfile.RegistryPath.Contains(BrowserSelectorCommon.Common.AppId))
+                                {
+                                    browsersList.Add(browserProfile);
+                                }
                             }
-                        });
+                    });
                 }
             } catch (Exception ex)
             { 
@@ -97,10 +102,14 @@ namespace BrowserSelectorCommon.Services
                             ExecutablePath = Registry.LocalMachine.OpenSubKey(REG_PATH + name + "\\shell\\open\\command")?.GetValue(string.Empty) as string,
                             RegistryPath = REG_PATH + name,
                         };
-                        browser.ExecutablePath = FixExecutablePath(URLassoc, browser.ExecutablePath);
-                        if (!browsersList.Exists(x => x.Name == browser.Name))
+                        //browser.ExecutablePath = FixExecutablePath(URLassoc, browser.ExecutablePath);
+                        List<IBrowser> browserProfiles = GrabProfiles(browser);
+                        foreach (var browserProfile in browserProfiles)
                         {
-                            browsersList.Add(browser);
+                            if (!browsersList.Exists(x => x.Name == browserProfile.Name) && !browserProfile.RegistryPath.Contains(BrowserSelectorCommon.Common.AppId))
+                            {
+                                browsersList.Add(browserProfile);
+                            }
                         }
                     });
                 }
@@ -120,6 +129,22 @@ namespace BrowserSelectorCommon.Services
             });
 
             return browsersList;
+        }
+
+        private static List<IBrowser> GrabProfiles(IBrowser browser)
+        {
+            if (BraveService.IsBrave(browser))
+            {
+                var profiles = BraveService.GetProfiles(browser);
+                if (profiles == null || profiles.Count == 0)
+                {
+                    return new List<IBrowser>() { browser };
+                } else
+                {
+                    return profiles;
+                }
+            }
+            return new List<IBrowser>() { browser };
         }
 
         private static string FixExecutablePath(string appId, string executablePath)
@@ -197,9 +222,13 @@ namespace BrowserSelectorCommon.Services
                         };
                         browser.ExecutablePath = string.IsNullOrEmpty(browser.ExecutablePath) ? browser.ExecutablePath : browser.ExecutablePath + "\\MicrosoftEdge.exe";
                         browser.IconPath = string.IsNullOrEmpty(browser.ExecutablePath) ? browser.ExecutablePath : browser.ExecutablePath + ",0";
-                        if (!browsersList.Exists(x => x.Name == browser.Name))
+                        List<IBrowser> browserProfiles = GrabProfiles(browser);
+                        foreach (var browserProfile in browserProfiles)
                         {
-                            browsersList.Add(browser);
+                            if (!browsersList.Exists(x => x.Name == browserProfile.Name) && !browserProfile.RegistryPath.Contains(BrowserSelectorCommon.Common.AppId))
+                            {
+                                browsersList.Add(browserProfile);
+                            }
                         }
                     }
                 }
