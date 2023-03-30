@@ -19,6 +19,7 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 
 ## ⚡️ Key Features
 
+- Handle browser profiles (Chrome, Brave)
 - Handle SafeLinks, a new Microsoft Defender for Office 365 links (Outlook, Teams etc.)
 - Acts like a Browser to choose a Browser
 - Detects all browsers installed on machine
