@@ -31,6 +31,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,11 +43,23 @@ namespace BrowserSelectorCommon
         public const string AppDesc = "Fancy Browser Selector is a lightweight UI tool for selecting browser before navigating to any web address.";
         public const string AppId = "FancyBrowserSelector";
         private static readonly string AppPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+        private static readonly string AppVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
         public static void RegisterAsBrowser()
         {
+#if !DEBUG
+            // handle new versions in different path
+            var apppath = (string)GetSetting(Constants.Settings.SETTING_APPPATH);
+            var version = (string)GetSetting(Constants.Settings.SETTING_VERSION);
+            if (string.IsNullOrEmpty(version) || (version != AppVersion && apppath != AppPath) || apppath != AppPath)
+            {
+                SystemRegisteringService.UnregisterBrowser(AppId);
+            }
+#endif
             SystemRegisteringService.RegisterBrowser(AppId, AppName, $"{AppPath},0", AppDesc, AppPath);
             SystemRegisteringService.SetAsDefault(AppId);
+            SetSetting(Constants.Settings.SETTING_VERSION, AppVersion);
+            SetSetting(Constants.Settings.SETTING_APPPATH, AppPath);
         }
 
         public static void UnRegisterAsBrowser()
