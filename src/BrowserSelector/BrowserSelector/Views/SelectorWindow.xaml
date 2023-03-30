@@ -77,8 +77,15 @@ SOFTWARE.
                             <TextBlock Grid.Column="0" Text="REQUESTED NAVIGATION TO:" FontSize="10"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" ToolTip="{Binding OriginalURL}" Visibility="{Binding UrlIsStripped, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <ui:SymbolIcon Symbol="Warning24" Margin="0,0,5,0" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" />
+                                <ui:SymbolIcon Symbol="Warning24" Margin="0,0,3,0" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" />
                                 <TextBlock Grid.Column="0" Text="STRIPPED FROM SAFELINK" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Right" ToolTip="{Binding UrlTrackersInfo}" Visibility="{Binding UrlHasTrackersFound, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <ui:SymbolIcon Symbol="InprivateAccount24" Margin="0,0,3,0" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" />
+                                <TextBlock Grid.Column="0" FontWeight="Bold" Text="{Binding UrlTrackersFound}" FontSize="11" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                <TextBlock Margin="3,0,0,0" Grid.Column="0" Text="TRACKERS" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                <TextBlock Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="0" Text=" REMOVED" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                <TextBlock Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='!'}" Grid.Column="0" Text=" FOUND" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
                             </StackPanel>
                         </Grid>
                         <TextBox Text="{Binding URL, Mode=OneWay}" IsReadOnly="True" HorizontalAlignment="Stretch">

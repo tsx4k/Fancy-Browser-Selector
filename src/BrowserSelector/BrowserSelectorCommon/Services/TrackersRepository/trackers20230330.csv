@@ -1,0 +1,77 @@
+name,platform,confirmed_in,unique_per_visitor
+fbclid,Facebook,,
+gclid, Google AdWords / Google Analytics,https://support.google.com/searchads/answer/6292795,
+gclsrc, Google DoubleClick,https://support.google.com/searchads/answer/6292795,
+utm_content, Google Analytics,,
+utm_term, Google Analytics,,
+utm_campaign, Google Analytics,,
+utm_medium, Google Analytics,,
+utm_source, Google Analytics,,
+utm_id, Google Analytics, https://support.google.com/urchin/answer/2633697,
+_ga, Google Analytics,,
+mc_cid, Mailchimp,,
+mc_eid, Mailchimp,,
+_bta_tid, Bronto, https://p.bm23.com/bta.js,
+_bta_c, Bronto, https://p.bm23.com/bta.js,
+trk_contact, Listrak,,
+trk_msg, Listrak,,
+trk_module, Listrak,,
+trk_sid, Listrak,,
+gdfms, GoDataFeed,,
+gdftrk, GoDataFeed,,
+gdffi, GoDataFeed,,
+_ke, Klaviyo, http://a.klaviyo.com/media/js/analytics/analytics.js,
+redirect_log_mongo_id, Springbot,,
+redirect_mongo_id, Springbot,,
+sb_referer_host, Springbot,,
+mkwid, Marin,,
+pcrid, Marin,,
+ef_id, Adobe Advertising Cloud, https://helpx.adobe.com/media-optimizer/internal-kb/conversion-tracking-basics.html,Yes
+s_kwcid, Adobe Analytics, https://docs.adobe.com/content/help/en/analytics/integration/advertising-analytics/advertising-analytics-workflow/aa-manual-vs-automatic-tracking.html,
+msclkid, Microsoft Advertising, https://help.ads.microsoft.com/apex/index/3/en/60000, Yes
+dm_i, dotdigital, https://support.dotdigital.com/hc/en-gb/articles/360006551019-Link-tracking, Yes
+epik, Pinterest,  https://painlessbloganalytics.com/what-is-fbclid-how-to-remove/, Yes
+pk_campaign, Piwik,,
+pk_kwd, Piwik,,
+pk_keyword, Piwik,,
+piwik_campaign, Piwik,,
+piwik_kwd, Piwik,,
+piwik_keyword, Piwik,,
+mtm_campaign, Matomo, https://matomo.org/docs/tracking-campaigns/,
+mtm_keyword, Matomo, https://matomo.org/docs/tracking-campaigns/,
+mtm_source, Matomo, https://matomo.org/docs/tracking-campaigns/,
+mtm_medium, Matomo, https://matomo.org/docs/tracking-campaigns/,
+mtm_content, Matomo, https://matomo.org/docs/tracking-campaigns/,
+mtm_cid, Matomo, https://matomo.org/docs/tracking-campaigns/,
+mtm_group, Matomo, https://matomo.org/docs/tracking-campaigns/,
+mtm_placement, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_campaign, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_keyword, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_source, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_medium, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_content, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_cid, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_group, Matomo, https://matomo.org/docs/tracking-campaigns/,
+matomo_placement, Matomo, https://matomo.org/docs/tracking-campaigns/,
+hsa_cam, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_grp, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_mt, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_src, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_ad, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_acc, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot, Yes
+hsa_net, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_kw, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_tgt, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+hsa_ver, Hubspot, https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,
+_branch_match_id, Branch, https://stackoverflow.com/a/37892369, Yes
+mkevt, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
+mkcid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
+mkrid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
+campid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
+toolid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
+customid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
+igshid, Instagram, https://github.com/brave/brave-browser/issues/11580,
+si, Spotify, https://community.spotify.com/t5/Desktop-Windows/si-Parameter-in-Spotify-URL-s/td-p/4538290,
+sms_source, Wunderkind, https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js, No
+sms_click, Wunderkind, https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js, Yes
+sms_uph, Wunderkind, https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js, Yes

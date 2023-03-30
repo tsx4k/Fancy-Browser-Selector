@@ -166,5 +166,9 @@ namespace BrowserSelectorCommon
             return LearnService.MatchHost(AppId, url);
         }
 
+        public static string RemoveTrackers(string url, out List<string> result)
+        {
+            return TrackersService.RemoveTrackers(url, out result);
+        }
     }
 }

@@ -147,6 +147,26 @@ namespace BrowserSelector.Views
                 }
 
 
+                // Find Trackers
+                var nurl = BrowserSelectorCommon.Common.RemoveTrackers(url, out List<string> result);
+                if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_REMOVE_TRACKERS) ?? "false"))
+                {
+                    if (!string.IsNullOrEmpty(nurl) && result.Count > 0)
+                    {
+                        url = nurl;
+                        ((SelectorWindowViewModel)DataContext).URL = url;
+                        ((SelectorWindowViewModel)DataContext).UrlHasTrackersRemoved = true;
+                    }
+                }
+                ((SelectorWindowViewModel)DataContext).UrlHasTrackersFound = result.Count > 0;
+                ((SelectorWindowViewModel)DataContext).UrlTrackersFound = result.Count;
+                var trackersInfo = string.Empty;
+                result.ForEach(x => trackersInfo += $"{x}\r\n");
+                ((SelectorWindowViewModel)DataContext).UrlTrackersInfo = trackersInfo;
+
+
+
+
                 if (!string.IsNullOrEmpty(progid))
                 {
                     int index = -1;

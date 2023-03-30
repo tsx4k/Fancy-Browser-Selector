@@ -43,7 +43,14 @@ namespace BrowserSelector
             var val = (bool)value;
             var param = (string)parameter;
 
-            return val ? Visibility.Visible : Visibility.Collapsed;
+            if (param == "!")
+            {
+                return !val ? Visibility.Visible : Visibility.Collapsed;
+            }
+            else
+            {
+                return val ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

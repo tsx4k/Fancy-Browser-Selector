@@ -65,9 +65,11 @@
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\SystemBrowsersService.cs" />
     <Compile Include="Services\SystemRegisteringService.cs" />
+    <Compile Include="Services\TrackersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Services\TrackersRepository\trackers20230330.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
