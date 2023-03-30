@@ -76,6 +76,18 @@ namespace BrowserSelector.ViewModels
 
         public Window Window { get; set; }
 
+        private bool _urlHasTrackersRemoved = false;
+        public bool UrlHasTrackersRemoved { get { return _urlHasTrackersRemoved; } set { _urlHasTrackersRemoved = value; OnPropertyChanged("UrlHasTrackersRemoved"); } }
+
+        private bool _urlHasTrackersFound = false;
+        public bool UrlHasTrackersFound { get { return _urlHasTrackersFound; } set { _urlHasTrackersFound = value; OnPropertyChanged("UrlHasTrackersFound"); } }
+
+        private int _urlTrackersFound = 0;
+        public int UrlTrackersFound { get { return _urlTrackersFound; } set { _urlTrackersFound = value; OnPropertyChanged("UrlTrackersFound"); } }
+
+        private string _urlTrackersInfo = null;
+        public string UrlTrackersInfo { get { return _urlTrackersInfo; } set { _urlTrackersInfo = value; OnPropertyChanged("UrlTrackersInfo"); } }
+
         public SelectorWindowViewModel(Window window)
         {
             this.Window = window;
