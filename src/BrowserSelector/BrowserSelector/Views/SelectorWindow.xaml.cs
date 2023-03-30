@@ -110,6 +110,8 @@ namespace BrowserSelector.Views
 
         private void UiWindow_Activated(object sender, EventArgs e)
         {
+            model.PrepareBrowsersList(true);
+
             if (lbBrowsers.SelectedIndex < 0)
             {
                 var progid = BrowserSelectorCommon.Common.GetLastSelectedBrowser();

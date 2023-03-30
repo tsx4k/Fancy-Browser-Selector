@@ -106,10 +106,10 @@ namespace BrowserSelector.ViewModels
             BrowserSelectorCommon.Common.OpenSettings();
         }
 
-        private void PrepareBrowsersList()
+        public void PrepareBrowsersList(bool force = false)
         {
             int index = ((SelectorWindow)Window).lbBrowsers.SelectedIndex;
-            browsers = BrowserSelectorCommon.Common.GetBrowsers(browsers);
+            browsers = BrowserSelectorCommon.Common.GetBrowsers(force ? null : browsers);
             ocbrowsers.Clear();
             browsers.ForEach(x => {
                 ocbrowsers.Add(x);

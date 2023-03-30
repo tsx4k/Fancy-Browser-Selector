@@ -133,15 +133,32 @@ namespace BrowserSelectorCommon.Services
 
         private static List<IBrowser> GrabProfiles(IBrowser browser)
         {
-            if (BraveService.IsBrave(browser))
+            if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LOAD_BROWSER_PROFILES) ?? "false"))
             {
-                var profiles = BraveService.GetProfiles(browser);
-                if (profiles == null || profiles.Count == 0)
+                if (BraveService.IsBrave(browser))
                 {
-                    return new List<IBrowser>() { browser };
-                } else
+                    var profiles = BraveService.GetProfiles(browser);
+                    if (profiles == null || profiles.Count == 0)
+                    {
+                        return new List<IBrowser>() { browser };
+                    }
+                    else
+                    {
+                        return profiles;
+                    }
+                }
+                else
+                if (ChromeService.IsChrome(browser))
                 {
-                    return profiles;
+                    var profiles = ChromeService.GetProfiles(browser);
+                    if (profiles == null || profiles.Count == 0)
+                    {
+                        return new List<IBrowser>() { browser };
+                    }
+                    else
+                    {
+                        return profiles;
+                    }
                 }
             }
             return new List<IBrowser>() { browser };
