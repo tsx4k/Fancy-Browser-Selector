@@ -118,8 +118,11 @@ namespace BrowserSelector.ViewModels
             BrowserSelectorCommon.Common.OpenSettings();
         }
 
+        bool browsersArePreparing = false;
         public void PrepareBrowsersList(bool force = false)
         {
+            if (browsersArePreparing) return;
+            browsersArePreparing = true;
             int index = ((SelectorWindow)Window).lbBrowsers.SelectedIndex;
             browsers = BrowserSelectorCommon.Common.GetBrowsers(force ? null : browsers);
             ocbrowsers.Clear();
@@ -130,6 +133,7 @@ namespace BrowserSelector.ViewModels
             {
                 ((SelectorWindow)Window).lbBrowsers.SelectedIndex = index;
             }
+            browsersArePreparing = false;
         }
 
         private void Close(object param)
