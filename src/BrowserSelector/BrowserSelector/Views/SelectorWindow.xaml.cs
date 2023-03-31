@@ -54,8 +54,6 @@ namespace BrowserSelector.Views
 
         public SelectorWindow()
         {
-            Wpf.Ui.Appearance.Watcher.Watch(this);
-
             InitializeComponent();
             DataContext = model = new ViewModels.SelectorWindowViewModel(this);
             model.ApplyTheme();
@@ -63,8 +61,6 @@ namespace BrowserSelector.Views
 
         public SelectorWindow(string url)
         {
-            Wpf.Ui.Appearance.Watcher.Watch(this);
-
             InitializeComponent();
             DataContext = model = new ViewModels.SelectorWindowViewModel(this) { URL = url, OriginalURL = url };
             model.ApplyTheme();

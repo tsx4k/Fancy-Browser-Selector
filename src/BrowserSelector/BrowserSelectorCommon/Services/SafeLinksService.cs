@@ -35,7 +35,7 @@ namespace BrowserSelectorCommon.Services
 {
     internal class SafeLinksService
     {
-        internal static bool IsSafeLink(string url, out string originalUrl)
+        internal static bool IsSafeLink(string url, out string originalUrl, int depth = 10)
         {
             // https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html?url=
             // https://eur01.safelinks.protection.outlook.com/ap/x-59584e83/?url=
@@ -51,6 +51,15 @@ namespace BrowserSelectorCommon.Services
                     if (!string.IsNullOrEmpty(nurl))
                     {
                         originalUrl = HttpUtility.UrlDecode(nurl);
+
+                        // handle nested safelinks
+                        if(depth-- >= 0)
+                        {
+                            if(IsSafeLink(originalUrl, out string depthUrl, depth))
+                            {
+                                originalUrl = depthUrl;
+                            }
+                        }
                         return true;
                     }
                 }
