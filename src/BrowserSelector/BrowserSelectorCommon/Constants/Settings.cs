@@ -42,5 +42,6 @@ namespace BrowserSelectorCommon.Constants
         public static readonly string SETTING_REMOVE_TRACKERS = "RemoveTrackers";
         public static readonly string SETTING_VERSION = "Version";
         public static readonly string SETTING_APPPATH = "AppPath";
+        public static readonly string SETTING_LOCALAPPDATA = "LocalAppData";
     }
 }

@@ -33,6 +33,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BrowserSelectorCommon.Services.BrowserExtensions
 {
@@ -43,20 +44,20 @@ namespace BrowserSelectorCommon.Services.BrowserExtensions
 
         public static bool IsChrome(IBrowser browser)
         {
-            var isBrave = browser?.ProgId?.ToLower().StartsWith("google chrome");
-            return isBrave ?? false;
+            var isChrome = browser?.ProgId?.ToLower().StartsWith("google chrome");
+            return isChrome ?? false;
         }
 
         public static List<IBrowser> GetProfiles(IBrowser mainBrowser)
         {
             var profiles = new List<IBrowser>();
-            string appDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Google\\Chrome\\User Data\\");
+            string appDataPath = System.IO.Path.Combine(BrowserSelectorCommon.Common.GetLocalAppDataPath(), "Google\\Chrome\\User Data\\");
             var configFile = System.IO.Path.Combine(appDataPath, ProfileConfig);
             if(System.IO.File.Exists(configFile))
             {
                 try {
                     string json = null;
-                    using(var file = new FileStream(configFile, FileMode.Open))
+                    using(var file = new FileStream(configFile, FileMode.Open, FileAccess.Read))
                     {
                         var reader = new StreamReader(file);
                         json = reader.ReadToEnd();

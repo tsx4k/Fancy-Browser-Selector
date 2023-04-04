@@ -34,6 +34,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BrowserSelectorCommon
 {
@@ -60,11 +61,31 @@ namespace BrowserSelectorCommon
             SystemRegisteringService.SetAsDefault(AppId);
             SetSetting(Constants.Settings.SETTING_VERSION, AppVersion);
             SetSetting(Constants.Settings.SETTING_APPPATH, AppPath);
+            SetSetting(Constants.Settings.SETTING_LOCALAPPDATA, Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
         }
 
         public static void UnRegisterAsBrowser()
         {
             SystemRegisteringService.UnregisterBrowser(AppId);
+        }
+
+        public static string GetLocalAppDataPath()
+        {
+            string path = SettingsService.GetSetting(AppId, Constants.Settings.SETTING_LOCALAPPDATA);
+            if (string.IsNullOrEmpty(path))
+            {
+                path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+                // Handle MSTeams odd appdatapath overrides e.g.:
+                // path returned is: C:\Users\<user>\AppData\Local\Microsoft\Teams\CustomProfiles\<profile>\AppData\Local\
+                // instead of: C:\Users\<user>\AppData\Local\
+                string subpath = "\\AppData\\Local\\";
+                if (path.IndexOf(subpath) != path.LastIndexOf(subpath))
+                {
+                    path = path.Substring(0, path.IndexOf(subpath) + subpath.Length);
+                }
+            }
+            return path;
         }
 
         public static List<IBrowser> GetBrowsers()
