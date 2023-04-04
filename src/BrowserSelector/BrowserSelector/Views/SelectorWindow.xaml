@@ -45,7 +45,6 @@ SOFTWARE.
         WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True"
         SizeToContent="WidthAndHeight"
-        WindowStyle="None"
         ResizeMode="NoResize"
         Topmost="True"
         Height="350" Width="500" MinHeight="350" MinWidth="500" MaxHeight="800" MaxWidth="800"
@@ -63,11 +62,7 @@ SOFTWARE.
         </Grid.Background>
         <DockPanel LastChildFill="True" Margin="20">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,-20,-20,0" Panel.ZIndex="11" >
-                    <ui:Button ToolTip="Settings" Cursor="Hand" Command="{Binding SettingsCommand}" Icon="Settings48" IconFilled="True" HorizontalAlignment="Right" Width="40" Height="40" Panel.ZIndex="11" />
-                    <ui:Button ToolTip="Abandon (Esc)" Cursor="Hand" Command="{Binding CloseCommand}" Icon="CloudOff48" IconForeground="Red" IconFilled="True" HorizontalAlignment="Right" Width="40" Height="40" Panel.ZIndex="11" Margin="6,0,0,0" />
-                </StackPanel>
-                <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-20,0,20">
+                <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,20">
                     <Image Source="\Resources\Logo.png" VerticalAlignment="Center" Width="40" Height="40" RenderOptions.BitmapScalingMode="Fant" />
                     <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="20,0,0,0"></TextBlock>
                 </DockPanel>
@@ -183,5 +178,13 @@ SOFTWARE.
                 </ListBox>
             </StackPanel>
         </DockPanel>
+        <ui:TitleBar
+            ShowMaximize="False"
+            ShowMinimize="False"
+            CanMaximize="False"
+            ShowHelp="True"
+            HelpClicked="TitleBar_SettingsClicked"
+            Grid.Row="0">
+        </ui:TitleBar>
     </Grid>
 </ui:FluentWindow>

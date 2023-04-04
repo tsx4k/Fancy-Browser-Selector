@@ -207,5 +207,10 @@ namespace BrowserSelector.Views
                 OpenBrowser(sender);
             }
         }
+
+        private void TitleBar_SettingsClicked(object sender, RoutedEventArgs e)
+        {
+            model.SettingsCommand.Execute(this);
+        }
     }
 }
