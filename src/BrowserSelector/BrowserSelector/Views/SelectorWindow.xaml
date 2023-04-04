@@ -57,9 +57,6 @@ SOFTWARE.
         <SolidColorBrush x:Key="SystemAccentColorSecondaryBrush" Color="{DynamicResource SystemAccentColorSecondary}" />
     </Window.Resources>
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="\Resources\LogoClear.png" Opacity="0.0" Stretch="UniformToFill" />
-        </Grid.Background>
         <DockPanel LastChildFill="True" Margin="20">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
                 <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,20">
@@ -67,22 +64,20 @@ SOFTWARE.
                     <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="20,0,0,0"></TextBlock>
                 </DockPanel>
                 <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="1">
-                        <Grid Grid.Column="0" Margin="0,-6,0,2" Panel.ZIndex="10">
-                            <TextBlock Grid.Column="0" Text="REQUESTED NAVIGATION TO:" FontSize="10"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid Margin="0,0,0,2">
+                            <TextBlock Text="REQUESTED NAVIGATION TO:" FontSize="10" Foreground="{DynamicResource TextFillColorSecondaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" ToolTip="{Binding OriginalURL}" Visibility="{Binding UrlIsStripped, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <ui:SymbolIcon Symbol="Warning24" Margin="0,0,3,0" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" />
-                                    <TextBlock Grid.Column="0" Text="STRIPPED FROM SAFELINK" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                    <TextBlock Text="STRIPPED FROM SAFELINK" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Right" ToolTip="{Binding UrlTrackersInfo}" Visibility="{Binding UrlHasTrackersFound, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <ui:SymbolIcon Symbol="InprivateAccount24" Margin="0,0,3,0" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" />
-                                    <TextBlock Grid.Column="0" FontWeight="Bold" Text="{Binding UrlTrackersFound}" FontSize="11" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                                    <TextBlock Margin="3,0,0,0" Grid.Column="0" Text="TRACKERS" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                                    <TextBlock Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="0" Text=" REMOVED" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                                    <TextBlock Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='!'}" Grid.Column="0" Text=" FOUND" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                    <TextBlock FontWeight="Bold" Text="{Binding UrlTrackersFound}" FontSize="11" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                    <TextBlock Margin="3,0,0,0" Text="TRACKERS" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                    <TextBlock Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}}" Text=" REMOVED" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                    <TextBlock Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='!'}" Text=" FOUND" FontSize="10" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" />
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
@@ -142,7 +137,7 @@ SOFTWARE.
                 </StackPanel>
             </DockPanel>
             <StackPanel>
-                <TextBlock Grid.Column="0" Text="SELECT BROWSER:" FontSize="10" Margin="0,2,0,2" Panel.ZIndex="10" Foreground="{DynamicResource TextFillColorSecondaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBlock Text="SELECT BROWSER:" FontSize="10" Margin="0,2,0,2" Foreground="{DynamicResource TextFillColorSecondaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
                 <ListBox VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" x:Name="lbBrowsers" ItemsSource="{Binding Browsers, Mode=OneWay}" Cursor="Hand" MouseDoubleClick="ListBox_MouseDoubleClick" MouseLeftButtonUp="ListBox_MouseLeftButtonUp">
                     <ListBox.ItemTemplate>
@@ -170,7 +165,6 @@ SOFTWARE.
                                             </Style.Triggers>
                                         </Style>
                                     </ui:Button.Style>
-
                                 </ui:Button>
                             </Grid>
                         </DataTemplate>
@@ -184,7 +178,7 @@ SOFTWARE.
             CanMaximize="False"
             ShowHelp="True"
             HelpClicked="TitleBar_SettingsClicked"
-            Grid.Row="0">
+            >
         </ui:TitleBar>
     </Grid>
 </ui:FluentWindow>
