@@ -191,5 +191,14 @@ namespace BrowserSelectorCommon
         {
             return TrackersService.RemoveTrackers(url, out result);
         }
+
+        public static string PrepareUrl(string url)
+        {
+            return url
+                .Replace("\r\n", "")
+                .Replace("\r", "")
+                .Replace("\n", "")
+                .Trim();
+        }
     }
 }

@@ -62,14 +62,8 @@ namespace BrowserSelector.Views
         public SelectorWindow(string url)
         {
             InitializeComponent();
+            url = BrowserSelectorCommon.Common.PrepareUrl(url);
             DataContext = model = new ViewModels.SelectorWindowViewModel(this) { URL = url, OriginalURL = url };
-            model.ApplyTheme();
-
-            this.Activated += SelectorWindow_Activated;
-        }
-
-        private void SelectorWindow_Activated(object sender, EventArgs e)
-        {
             model.ApplyTheme();
         }
 
@@ -106,7 +100,12 @@ namespace BrowserSelector.Views
 
         private void UiWindow_Activated(object sender, EventArgs e)
         {
+            model.ApplyTheme();
             model.PrepareBrowsersList(true);
+
+            // fix extra borders
+            SizeToContent = SizeToContent.Manual;
+            SizeToContent = SizeToContent.WidthAndHeight;
 
             if (lbBrowsers.SelectedIndex < 0)
             {
@@ -160,9 +159,6 @@ namespace BrowserSelector.Views
                 result.ForEach(x => trackersInfo += $"{x}\r\n");
                 ((SelectorWindowViewModel)DataContext).UrlTrackersInfo = trackersInfo;
 
-
-
-
                 if (!string.IsNullOrEmpty(progid))
                 {
                     int index = -1;
@@ -174,6 +170,10 @@ namespace BrowserSelector.Views
                             lbBrowsers.SelectedIndex = index;
                             break;
                         }
+                    }
+                    if(lbBrowsers.SelectedIndex < 0 && lbBrowsers.Items.Count > 0)
+                    {
+                        lbBrowsers.SelectedIndex = 0;
                     }
                 }
                 else
