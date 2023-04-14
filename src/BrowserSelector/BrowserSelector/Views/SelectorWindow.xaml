@@ -95,10 +95,10 @@ SOFTWARE.
                 </DockPanel>
             </StackPanel>
             <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,15,0,0">
-                <StackPanel DockPanel.Dock="Left">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                     <ui:Button IconFilled="True" BorderBrush="{DynamicResource SystemAccentColorSecondaryBrush}" IconForeground="{DynamicResource SystemAccentColorSecondaryBrush}" Command="{Binding OpenBrowserCommand}" CommandParameter="{x:Null}" ToolTip="Open link in selected browser (Enter or Mouse double click on list item)" Cursor="Hand" FontSize="20" Padding="30,0,30,0" Height="44" IsEnabled="True" Icon="Open24">
-                        
                     </ui:Button>
+                    <ui:ToggleSwitch Margin="20,0" Content="Remember my choice" Visibility="{Binding CanRememberChoice, Converter={StaticResource BooleanToVisibilityConverter}}" IsChecked="{Binding RememberChoice}" ToolTip="{Binding ChoiceInfo}" Style="{StaticResource HintableUiToggleSwitchStyle}" />
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Right" VerticalAlignment="Bottom">
                     <TextBlock HorizontalAlignment="Right" ToolTip="Buy me a Coffee ☕">

@@ -187,6 +187,31 @@ namespace BrowserSelectorCommon
             return LearnService.MatchHost(AppId, url);
         }
 
+        public static bool SaveChoice(IBrowser browser, string url)
+        {
+            return RememberChoiceService.SaveChoice(AppId, browser, url);
+        }
+
+        public static bool RemoveChoiceByUrl(string url)
+        {
+            return RememberChoiceService.RemoveChoiceByUrl(AppId, url);
+        }
+
+        public static bool RemoveChoice(string host)
+        {
+            return RememberChoiceService.RemoveChoice(AppId, host);
+        }
+
+        public static string GetChoice(string url)
+        {
+            return RememberChoiceService.GetChoice(AppId, url);
+        }
+
+        public static List<Tuple<string, string>> GetAllChoices()
+        {
+            return RememberChoiceService.GetAllChoices(AppId);
+        }
+
         public static string RemoveTrackers(string url, out List<string> result)
         {
             return TrackersService.RemoveTrackers(url, out result);

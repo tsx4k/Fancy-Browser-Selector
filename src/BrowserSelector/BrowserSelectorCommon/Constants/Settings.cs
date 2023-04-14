@@ -43,5 +43,6 @@ namespace BrowserSelectorCommon.Constants
         public static readonly string SETTING_VERSION = "Version";
         public static readonly string SETTING_APPPATH = "AppPath";
         public static readonly string SETTING_LOCALAPPDATA = "LocalAppData";
+        public static readonly string SETTING_CHOICE_INFO_SHOWN = "ChoiceInfoShown";
     }
 }
