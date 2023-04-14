@@ -88,6 +88,14 @@ namespace BrowserSelector.ViewModels
         private string _urlTrackersInfo = null;
         public string UrlTrackersInfo { get { return _urlTrackersInfo; } set { _urlTrackersInfo = value; OnPropertyChanged("UrlTrackersInfo"); } }
 
+        private bool _canRememberChoice = false;
+        public bool CanRememberChoice { get { return _canRememberChoice; } set { _canRememberChoice = value; OnPropertyChanged("CanRememberChoice"); } }
+
+        private bool _rememberChoice = false, _choiceInfoShown = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_CHOICE_INFO_SHOWN) ?? "false");
+        public bool RememberChoice { get { return _rememberChoice; } set { _rememberChoice = ShowChoiceInfo(value); OnPropertyChanged("RememberChoice"); } }
+
+        public string ChoiceInfo => "FBS will remember your choice for this host and next time it won't show this window until you hold a SHIFT key or manage this bahaviour in Settings.";
+
         public SelectorWindowViewModel(Window window)
         {
             this.Window = window;
@@ -98,6 +106,20 @@ namespace BrowserSelector.ViewModels
             SettingsCommand = new RelayCommand(OpenSettings);
 
             PrepareBrowsersList();
+        }
+
+        private bool ShowChoiceInfo(bool value)
+        {
+            if (!value) return false;
+            else if (_choiceInfoShown) return value;
+            _choiceInfoShown = true;
+            BrowserSelectorCommon.Common.SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_CHOICE_INFO_SHOWN, _choiceInfoShown.ToString());
+            return MessageBox.Show(Window, ChoiceInfo, BrowserSelectorCommon.Common.AppName, MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK) == MessageBoxResult.OK;
+        }
+
+        public void SetRememberChoiceSilently(bool value)
+        {
+            _rememberChoice = value;
         }
 
         public void ApplyTheme()

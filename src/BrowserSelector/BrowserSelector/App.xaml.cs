@@ -43,7 +43,13 @@ namespace BrowserSelector
         {
             if(e.Args.Count() >= 1)
             {
-                MainWindow = new Views.SelectorWindow(e.Args[0]);
+                var selectorWindow = new Views.SelectorWindow(e.Args[0]);
+                MainWindow = selectorWindow;
+                if(!selectorWindow.CanShow)
+                {
+                    Application.Current.Shutdown();
+                    return;
+                }
             } else
             {
                 MainWindow = new Views.MainWindow();

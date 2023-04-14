@@ -51,13 +51,8 @@ namespace BrowserSelector.Views
     public partial class SelectorWindow : FluentWindow
     {
         SelectorWindowViewModel model;
-
-        public SelectorWindow()
-        {
-            InitializeComponent();
-            DataContext = model = new ViewModels.SelectorWindowViewModel(this);
-            model.ApplyTheme();
-        }
+        bool firstPrepare = true;
+        public bool CanShow { get; set; } = true;
 
         public SelectorWindow(string url)
         {
@@ -65,6 +60,8 @@ namespace BrowserSelector.Views
             url = BrowserSelectorCommon.Common.PrepareUrl(url);
             DataContext = model = new ViewModels.SelectorWindowViewModel(this) { URL = url, OriginalURL = url };
             model.ApplyTheme();
+
+            PrepareWindow();
         }
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -74,21 +71,30 @@ namespace BrowserSelector.Views
 
         public void OpenBrowser(object sender)
         {
-            var listBox = sender as ListBox;
-            if (listBox == null) 
+            IBrowser browser = sender as IBrowser;
+            ListBox listBox = sender as ListBox;
+            if (listBox == null)
             {
                 listBox = lbBrowsers;
             }
-            if (listBox != null)
+            if (browser == null && listBox != null)
             {
-                var browser = listBox.SelectedItem as IBrowser;
-                if (browser != null)
+                browser = (sender as ListBox).SelectedItem as IBrowser;
+            }
+            if (browser != null)
+            {
+                Hide();
+                BrowserSelectorCommon.Common.SetLastSelectedBrowser(browser.ProgId);
+                if (model.RememberChoice)
                 {
-                    Hide();
-                    BrowserSelectorCommon.Common.SetLastSelectedBrowser(browser.ProgId);
-                    BrowserSelectorCommon.Common.OpenBrowser(browser, ((SelectorWindowViewModel)DataContext).URL);
-                    Close();
+                    BrowserSelectorCommon.Common.SaveChoice(browser, model.URL);
                 }
+                else
+                {
+                    BrowserSelectorCommon.Common.RemoveChoiceByUrl(model.URL);
+                }
+                BrowserSelectorCommon.Common.OpenBrowser(browser, ((SelectorWindowViewModel)DataContext).URL);
+                Close();
             }
         }
 
@@ -98,15 +104,20 @@ namespace BrowserSelector.Views
                 this.DragMove();
         }
 
-        private void UiWindow_Activated(object sender, EventArgs e)
+        private void PrepareWindow()
         {
             model.ApplyTheme();
             model.PrepareBrowsersList(true);
 
-            // fix extra borders
-            SizeToContent = SizeToContent.Manual;
-            SizeToContent = SizeToContent.WidthAndHeight;
+            if (!firstPrepare)
+            {
 
+                // fix extra borders
+                SizeToContent = SizeToContent.Manual;
+                SizeToContent = SizeToContent.WidthAndHeight;
+            }
+            firstPrepare = false;
+            IBrowser selectedBrowser = null;
             if (lbBrowsers.SelectedIndex < 0)
             {
                 var progid = BrowserSelectorCommon.Common.GetLastSelectedBrowser();
@@ -135,7 +146,7 @@ namespace BrowserSelector.Views
                 if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS) ?? "false"))
                 {
                     string learnProgid = BrowserSelectorCommon.Common.GetLearning(urlForLearning);
-                    if(!string.IsNullOrEmpty(learnProgid))
+                    if (!string.IsNullOrEmpty(learnProgid))
                     {
                         progid = learnProgid;
                     }
@@ -162,16 +173,17 @@ namespace BrowserSelector.Views
                 if (!string.IsNullOrEmpty(progid))
                 {
                     int index = -1;
-                    foreach(var x in ((SelectorWindowViewModel)DataContext).Browsers)
+                    foreach (var x in ((SelectorWindowViewModel)DataContext).Browsers)
                     {
                         index++;
-                        if(x.ProgId == progid)
+                        if (x.ProgId == progid)
                         {
+                            selectedBrowser = x;
                             lbBrowsers.SelectedIndex = index;
                             break;
                         }
                     }
-                    if(lbBrowsers.SelectedIndex < 0 && lbBrowsers.Items.Count > 0)
+                    if (lbBrowsers.SelectedIndex < 0 && lbBrowsers.Items.Count > 0)
                     {
                         lbBrowsers.SelectedIndex = 0;
                     }
@@ -183,7 +195,29 @@ namespace BrowserSelector.Views
                         lbBrowsers.SelectedIndex = 0;
                     }
                 }
+
+                if (selectedBrowser != null)
+                {
+                    string choice = BrowserSelectorCommon.Common.GetChoice(url);
+                    if(!string.IsNullOrEmpty(choice) && choice == progid)
+                    {
+                        model.SetRememberChoiceSilently(true);
+                        KeyStates ksLShift = Keyboard.GetKeyStates(Key.LeftShift);
+                        KeyStates ksRShift = Keyboard.GetKeyStates(Key.RightShift);
+                        if (!ksLShift.HasFlag(KeyStates.Down) && !ksRShift.HasFlag(KeyStates.Down))
+                        {
+                            CanShow = false;
+                            OpenBrowser(selectedBrowser);
+                        }
+                    }
+                }
             }
+            model.CanRememberChoice = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS) ?? "false");
+        }
+
+        private void UiWindow_Activated(object sender, EventArgs e)
+        {
+            PrepareWindow();
         }
 
         private void UiWindow_KeyUp(object sender, KeyEventArgs e)
