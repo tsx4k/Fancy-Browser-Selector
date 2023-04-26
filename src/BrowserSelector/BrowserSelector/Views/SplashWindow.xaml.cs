@@ -24,65 +24,68 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
+using BrowserSelector.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Windows.Threading;
+using Wpf.Ui.Controls.Window;
 
-namespace BrowserSelector
+namespace BrowserSelector.Views
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaction logic for SplashWindow.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class SplashWindow : Window
     {
-        private async void Application_Startup(object sender, StartupEventArgs e)
+        bool canClose = false, isStarted = false;
+        SplashWindowViewModel model;
+
+        public SplashWindow(TimeSpan duration)
         {
-            if(e.Args.Count() >= 1)
-            {
-                var selectorWindow = new Views.SelectorWindow(e.Args[0]);
-                MainWindow = selectorWindow;
-                await selectorWindow.DetectShowableAsync();
-                if(!selectorWindow.CanShow)
-                {
-                    Application.Current.Shutdown();
-                    return;
-                }
-            } else
-            {
-                MainWindow = new Views.MainWindow();
-            }
-            MainWindow.Show();
+            DataContext = model = new SplashWindowViewModel(this, duration);
+            InitializeComponent();
         }
 
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        public void AllowClose(bool value)
         {
-            if (MainWindow != null)
+            canClose = value;
+        }
+
+        private void UiWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !canClose;
+        }
+
+        private void UiWindow_Activated(object sender, EventArgs e)
+        {
+            if(!isStarted)
             {
-                System.Windows.MessageBox.Show(MainWindow, $"Exception occured:\n{e.Exception}", BrowserSelectorCommon.Common.AppName, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                System.Windows.MessageBox.Show($"Exception occured:\n{e.Exception}", BrowserSelectorCommon.Common.AppName, MessageBoxButton.OK, MessageBoxImage.Error);
+                isStarted = true;
             }
         }
 
-        private void Application_Exit(object sender, ExitEventArgs e)
+        internal async Task ShowAsync(TimeSpan duration)
         {
-
-        }
-
-        private void Application_Activated(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Application_Deactivated(object sender, EventArgs e)
-        {
-
+            Show();
+            while(!isStarted)
+            {
+                await Task.Delay(100);
+            }
+            model.LogoVisibility = Visibility.Visible;
+            await Task.Delay(duration);
+            canClose = true;
+            Close();
         }
     }
 }
