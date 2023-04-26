@@ -52,6 +52,7 @@ namespace BrowserSelector.Views
     {
         SelectorWindowViewModel model;
         bool firstPrepare = true;
+        private int SplashScreenDuration = 2000; // ms
         public bool CanShow { get; set; } = true;
 
         public SelectorWindow(string url)
@@ -60,8 +61,6 @@ namespace BrowserSelector.Views
             url = BrowserSelectorCommon.Common.PrepareUrl(url);
             DataContext = model = new ViewModels.SelectorWindowViewModel(this) { URL = url, OriginalURL = url };
             model.ApplyTheme();
-
-            PrepareWindow();
         }
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -94,7 +93,6 @@ namespace BrowserSelector.Views
                     BrowserSelectorCommon.Common.RemoveChoiceByUrl(model.URL);
                 }
                 BrowserSelectorCommon.Common.OpenBrowser(browser, ((SelectorWindowViewModel)DataContext).URL);
-                Close();
             }
         }
 
@@ -104,7 +102,7 @@ namespace BrowserSelector.Views
                 this.DragMove();
         }
 
-        private void PrepareWindow()
+        private async Task PrepareWindow()
         {
             model.ApplyTheme();
             model.PrepareBrowsersList(true);
@@ -207,6 +205,7 @@ namespace BrowserSelector.Views
                         if (!ksLShift.HasFlag(KeyStates.Down) && !ksRShift.HasFlag(KeyStates.Down))
                         {
                             CanShow = false;
+                            await ShowSplashScreen(TimeSpan.FromMilliseconds(SplashScreenDuration));
                             OpenBrowser(selectedBrowser);
                         }
                     }
@@ -215,9 +214,16 @@ namespace BrowserSelector.Views
             model.CanRememberChoice = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS) ?? "false");
         }
 
-        private void UiWindow_Activated(object sender, EventArgs e)
+        private async Task ShowSplashScreen(TimeSpan duration)
         {
-            PrepareWindow();
+            SplashWindow splashWindow = new SplashWindow(duration);
+            await splashWindow.ShowAsync(duration);
+        }
+
+
+        private async void UiWindow_Activated(object sender, EventArgs e)
+        {
+            await PrepareWindow();
         }
 
         private void UiWindow_KeyUp(object sender, KeyEventArgs e)
@@ -245,6 +251,11 @@ namespace BrowserSelector.Views
         private void TitleBar_SettingsClicked(object sender, RoutedEventArgs e)
         {
             model.SettingsCommand.Execute(this);
+        }
+
+        internal async Task DetectShowableAsync()
+        {
+            await PrepareWindow();
         }
     }
 }

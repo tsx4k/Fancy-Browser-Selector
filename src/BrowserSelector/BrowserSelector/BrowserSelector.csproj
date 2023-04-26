@@ -87,6 +87,7 @@
     <Compile Include="Extensions\HyperlinkExtension.cs" />
     <Compile Include="Relay\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\SplashWindowViewModel.cs" />
     <Compile Include="ViewModels\EditCommentWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SelectorWindowViewModel.cs" />
@@ -95,6 +96,9 @@
     </Compile>
     <Compile Include="Views\SelectorWindow.xaml.cs">
       <DependentUpon>SelectorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplashWindow.xaml.cs">
+      <DependentUpon>SplashWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="UI\UIEnhancements.xaml">
       <SubType>Designer</SubType>
@@ -117,6 +121,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\SelectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplashWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
