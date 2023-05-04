@@ -55,7 +55,40 @@ namespace BrowserSelectorCommon.Services.BrowserExtensions
             var configFile = System.IO.Path.Combine(appDataPath, ProfileConfig);
             if(System.IO.File.Exists(configFile))
             {
-                try {
+                try
+                {
+                    if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_GRAB_BROWSER_PROFILE_SILENTLY) ?? "false"))
+                    {
+                        var tempPath = System.IO.Path.Combine(BrowserSelectorCommon.Common.GetLocalAppDataPath(), "Temp");
+                        var symlink_configFile = System.IO.Path.Combine(tempPath, "fbs_chrome.json");
+                        if (!System.IO.File.Exists(symlink_configFile))
+                        {
+                            try
+                            {
+                                if (!System.IO.Directory.Exists(tempPath))
+                                {
+                                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(symlink_configFile));
+                                }
+                                Task.WaitAll(SymlinkService.CreateSymlink(configFile, symlink_configFile, true));
+                            }
+                            catch (Exception ex)
+                            {
+                                // TODO: log
+                            }
+                        }
+                        if (System.IO.File.Exists(symlink_configFile))
+                        {
+                            configFile = symlink_configFile;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // TODO: log
+                }
+
+                try
+                {
                     string json = null;
                     using(var file = new FileStream(configFile, FileMode.Open, FileAccess.Read))
                     {

@@ -44,5 +44,6 @@ namespace BrowserSelectorCommon.Constants
         public static readonly string SETTING_APPPATH = "AppPath";
         public static readonly string SETTING_LOCALAPPDATA = "LocalAppData";
         public static readonly string SETTING_CHOICE_INFO_SHOWN = "ChoiceInfoShown";
+        public static readonly string SETTING_GRAB_BROWSER_PROFILE_SILENTLY = "GrabBrowserProfileSilently";
     }
 }

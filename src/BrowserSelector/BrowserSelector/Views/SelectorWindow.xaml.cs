@@ -99,7 +99,13 @@ namespace BrowserSelector.Views
         private void UiWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            {
+                try
+                {
+                    this.DragMove();
+                }
+                catch { }
+            }
         }
 
         private async Task PrepareWindow()

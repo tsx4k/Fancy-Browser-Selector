@@ -24,68 +24,53 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-using BrowserSelector.ViewModels;
 using BrowserSelectorCommon.Interfaces;
+using BrowserSelectorCommon.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Wpf.Ui.Controls.Window;
 
-namespace BrowserSelector.Views
+namespace BrowserSelectorCommon.Services
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : FluentWindow
+    internal class SymlinkService
     {
-        MainWindowViewModel model;
+        private static readonly int TIMEOUT = 3000;
 
-        public MainWindow()
+        public static Task<bool> CreateSymlink(string from, string to, bool isHardlink)
         {
-            Wpf.Ui.Appearance.Watcher.Watch(this);
-
-            InitializeComponent();
-            model = new MainWindowViewModel();
-            model.ApplyTheme();
-            DataContext = model;
-        }
-
-        private void UiWindow_Activated(object sender, EventArgs e)
-        {
-            model.ApplyTheme();
-        }
-
-        private void UiWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
+            try
             {
-                try
+                ProcessStartInfo psi = new ProcessStartInfo()
                 {
-                    this.DragMove();
+                    FileName = "cmd.exe",
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+                string args = $"/C mklink {(isHardlink ? "/h " : "")}\"{to}\" \"{from}\"";
+                psi.Arguments = args;
+                var process = ProcessService.StartProcess(psi);
+                var startAt = DateTime.Now;
+                while(process != null && !process.HasExited)
+                {
+                    if (DateTime.Now.Subtract(startAt).TotalMilliseconds > TIMEOUT) break;
+                    Task.Delay(100);
                 }
-                catch { }
+                if(process != null && !process.HasExited) 
+                {
+                    try
+                    {
+                        process.Kill();
+                    } catch { }
+                }
+                return Task.FromResult(process != null && process.ExitCode == 0);
             }
-        }
-
-        private void UiWindow_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape || e.Key == Key.Enter)
-            {
-                Close();
-            }
+            catch { }
+            return Task.FromResult(false);
         }
     }
 }

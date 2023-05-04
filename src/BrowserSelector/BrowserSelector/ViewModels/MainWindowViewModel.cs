@@ -93,6 +93,9 @@ namespace BrowserSelector.ViewModels
         private bool settingRemoveTrackers = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_REMOVE_TRACKERS) ?? "false");
         public bool SettingRemoveTrackers { get { return settingRemoveTrackers; } set { settingRemoveTrackers = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_REMOVE_TRACKERS, value.ToString()); OnPropertyChanged("SettingRemoveTrackers"); } }
 
+        private bool settingGrabBrowserProfileSilently = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_GRAB_BROWSER_PROFILE_SILENTLY) ?? "false");
+        public bool SettingGrabBrowserProfileSilently { get { return settingGrabBrowserProfileSilently; } set { settingGrabBrowserProfileSilently = value; SetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_GRAB_BROWSER_PROFILE_SILENTLY, value.ToString()); OnPropertyChanged("SettingGrabBrowserProfileSilently"); } }
+
 
 
         private void SetSetting(string key, string value)
