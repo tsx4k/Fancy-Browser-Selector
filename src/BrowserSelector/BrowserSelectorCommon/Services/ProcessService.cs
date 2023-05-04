@@ -45,6 +45,11 @@ namespace BrowserSelectorCommon.Services
             Process.Start(psi);
         }
 
+        internal static Process StartProcess(ProcessStartInfo psi)
+        {
+            return Process.Start(psi);
+        }
+
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         private struct STARTUPINFO
         {

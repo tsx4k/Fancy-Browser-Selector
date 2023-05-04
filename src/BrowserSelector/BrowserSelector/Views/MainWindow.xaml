@@ -45,7 +45,7 @@ SOFTWARE.
         ExtendsContentIntoTitleBar="True"
         WindowBackdropType="Mica"
         WindowCornerPreference="Default"
-        Title="{Binding Title, Mode=OneWay}" Height="600" Width="650"
+        Title="{Binding Title, Mode=OneWay}" Height="650" Width="650"
         MouseDown="UiWindow_MouseDown"
         Activated="UiWindow_Activated"
         KeyUp="UiWindow_KeyUp"
@@ -120,6 +120,8 @@ SOFTWARE.
                 <ui:ToggleSwitch Content="Remove Known Trackers" IsChecked="{Binding SettingRemoveTrackers}" ToolTip="FBS will detect and automatically remove known trackers from the URL." Style="{StaticResource HintableUiToggleSwitchStyle}" />
                 <Rectangle Height="1" Fill="{DynamicResource ControlFillColorSecondaryBrush}" Margin="0,10" />
                 <ui:ToggleSwitch Content="Load browser profiles" IsChecked="{Binding SettingLoadBrowserProfiles}" ToolTip="FBS will try to detect and load a list of profiles in browser instead of only default browser." Style="{StaticResource HintableUiToggleSwitchStyle}" />
+                <Rectangle Height="0" Fill="{DynamicResource ControlFillColorSecondaryBrush}" Margin="0,10" />
+                <ui:ToggleSwitch IsEnabled="{Binding SettingLoadBrowserProfiles}" Margin="30,0,0,0" Content="Try to load profiles silently" IsChecked="{Binding SettingGrabBrowserProfileSilently}" ToolTip="FBS will use an alternative method to grab browser profile file to avoid warning dialogs from anti-malware monitoring software like Cynet etc." Style="{StaticResource HintableUiToggleSwitchStyle}" />
                 <Rectangle Height="1" Fill="{DynamicResource ControlFillColorSecondaryBrush}" Margin="0,10" />
 
             </StackPanel>
