@@ -46,6 +46,7 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 </p>
 </div>
 
+      
 ## ⚡️ Support
 
 <div align="center" style="display:flex;flex-direction:column;">
@@ -56,6 +57,16 @@ Introducing FBS a Fancy Browser Selector – the open-source, free Browser Selec
 <br /><br /><a href="https://buycoffee.to/tsx" target="_blank"><b>Buy Coffee To</b><br /><img src="https://buycoffee.to/btn/buycoffeeto-btn-primary.svg" style="width: 200px" alt="Postaw mi kawę na buycoffee.to"></a>
 </p>
 </div>
+      
+      
+## ⚡️ Partners and Supporters
+
+<div style="display:block;width:100%;background-color:#000000 !important;height:60px;">
+<p align="center">
+<a href="https://www.advancedinstaller.com/" target="_blank"><img src="https://raw.githubusercontent.com/tsx4k/Fancy-Browser-Selector/main/github-assets/advanced-installer-logo-bw.svg" style="height: 60px; background-color:#000000;" height="60" /></a>
+</p>
+</div>
+     
 
 ## License
 
