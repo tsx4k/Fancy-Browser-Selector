@@ -78,7 +78,7 @@ namespace BrowserSelector.Views
             }
             if (browser == null && listBox != null)
             {
-                browser = (sender as ListBox).SelectedItem as IBrowser;
+                browser = listBox.SelectedItem as IBrowser;
             }
             if (browser != null)
             {
