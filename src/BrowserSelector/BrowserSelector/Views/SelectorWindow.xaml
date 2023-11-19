@@ -70,8 +70,8 @@ SOFTWARE.
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" ToolTip="{Binding OriginalURL}" Visibility="{Binding UrlIsStripped, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <TextBlock Margin="0" Padding="0" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                        <Hyperlink local:HyperlinkExtension.IsExternal="false" Command="{Binding DataContext.SafelinkStrippedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}" NavigateUri=":safelink" TextDecorations="None" Background="#01000000">
-                                            <ui:SymbolIcon Symbol="Warning24" Margin="0,0,3,0" />
+                                        <Hyperlink local:HyperlinkExtension.IsExternal="false" Command="{Binding DataContext.SafelinkStrippedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}" TextDecorations="None" Background="#01000000">
+                                            <ui:SymbolIcon Symbol="Warning24" Margin="0,0,0,0" />
                                             <TextBlock Margin="0,-4,0,0" Padding="0" Text="STRIPPED FROM SAFELINK" FontSize="10">
                                             </TextBlock>
                                                 <Hyperlink.Style>
@@ -91,10 +91,10 @@ SOFTWARE.
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="16,0,0,0" HorizontalAlignment="Right" ToolTip="{Binding UrlTrackersInfo}" Visibility="{Binding UrlHasTrackersFound, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <TextBlock Margin="0" Padding="0" Foreground="{DynamicResource SystemAccentColorSecondaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                        <Hyperlink local:HyperlinkExtension.IsExternal="false" Command="{Binding DataContext.TrackersFoundCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}" NavigateUri=":safelink" TextDecorations="None" Background="#01000000">
+                                        <Hyperlink local:HyperlinkExtension.IsExternal="false" Command="{Binding DataContext.TrackersFoundCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" CommandParameter="{Binding}" TextDecorations="None" Background="#01000000">
                                             <ui:SymbolIcon Symbol="InprivateAccount24" Margin="0,0,0,0" />
-                                            <TextBlock Margin="0,-4,0,0" FontWeight="Bold" Text="{Binding UrlTrackersFound}" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                                            <TextBlock Margin="2,-4,0,0" Text="TRACKER" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                            <TextBlock Margin="-2,-4,0,0" FontWeight="Bold" Text="{Binding UrlTrackersFound}" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                            <TextBlock Margin="0,-4,0,0" Text="TRACKER" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" />
                                             <TextBlock Margin="0,-4,0,0" Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}}" Text="REMOVED" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" />
                                             <TextBlock Margin="0,-4,0,0" Visibility="{Binding UrlHasTrackersRemoved, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='!'}" Text="FOUND" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" />
                                                 <Hyperlink.Style>
