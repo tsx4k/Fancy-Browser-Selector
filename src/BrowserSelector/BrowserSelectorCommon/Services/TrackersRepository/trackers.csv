@@ -1,12 +1,14 @@
 name,platform,confirmed_in,unique_per_visitor
 fbclid,Facebook,,
 gclid, Google AdWords / Google Analytics,https://support.google.com/searchads/answer/6292795,
+gad_source, Google AdWords / Google Analytics,https://support.google.com/searchads/answer/6292795,
 gclsrc, Google DoubleClick,https://support.google.com/searchads/answer/6292795,
 utm_content, Google Analytics,,
 utm_term, Google Analytics,,
 utm_campaign, Google Analytics,,
 utm_medium, Google Analytics,,
 utm_source, Google Analytics,,
+utm_feed, Google Analytics,,
 utm_id, Google Analytics, https://support.google.com/urchin/answer/2633697,
 _ga, Google Analytics,,
 mc_cid, Mailchimp,,
@@ -71,7 +73,30 @@ campid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-par
 toolid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
 customid, eBay, https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format, No
 igshid, Instagram, https://github.com/brave/brave-browser/issues/11580,
+igsh, Instagram, https://github.com/brave/brave-browser/issues/11580,
 si, Spotify, https://community.spotify.com/t5/Desktop-Windows/si-Parameter-in-Spotify-URL-s/td-p/4538290,
 sms_source, Wunderkind, https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js, No
 sms_click, Wunderkind, https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js, Yes
 sms_uph, Wunderkind, https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js, Yes
+reco_id, Allegro,,
+sid, Allegro (+more),,
+ev_campaign_id, Allegro,,
+snapshot, Allegro,,
+bi_s, Allegro,,
+bi_m, Allegro,,
+bi_c, Allegro,,
+bi_t, Allegro,,
+referrer, Allegro (+more),,
+emission_unit_id, Allegro,,
+affiliate, Eventim.pl (+more),,
+ovuser, Sharepoint,,
+crid, Amazon,,
+keywords, Amazon (+more),,
+qid, Amazon,,
+sprefix, Amazon,,
+sr, Amazon,,
+twclid, Twitter,,
+
+
+
+

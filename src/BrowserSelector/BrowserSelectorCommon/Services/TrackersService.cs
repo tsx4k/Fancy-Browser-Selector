@@ -98,7 +98,7 @@ _ga, Google Analytics,,
             // "BrowserSelectorCommon.Services.TrackersRepository.trackers20230330.csv"
             try
             {
-                using (Stream s = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("BrowserSelectorCommon.Services.TrackersRepository.trackers20230330.csv"))
+                using (Stream s = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("BrowserSelectorCommon.Services.TrackersRepository.trackers.csv"))
                 {
                     TextReader reader = new StreamReader(s);
                     string line = null;

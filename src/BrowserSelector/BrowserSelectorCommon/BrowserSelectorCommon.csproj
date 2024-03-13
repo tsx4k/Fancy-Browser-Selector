@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <EmbeddedResource Include="Services\TrackersRepository\trackers20230330.csv" />
+    <EmbeddedResource Include="Services\TrackersRepository\trackers.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
