@@ -39,12 +39,14 @@ namespace BrowserSelectorCommon.Services
         {
             // https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html?url=
             // https://eur01.safelinks.protection.outlook.com/ap/x-59584e83/?url=
+            // https://outlook.office.com/mail/safelink.html?url=
             try
             {
                 Uri uri = new Uri(url);
                 if(
                     (uri.Host.ToLower().EndsWith(".office.net") && uri.AbsolutePath.Contains("/safelinks/") && uri.AbsolutePath.Contains("-safelinks.html")) ||
-                    (uri.Host.ToLower().EndsWith(".safelinks.protection.outlook.com"))
+                    (uri.Host.ToLower().EndsWith(".safelinks.protection.outlook.com")) ||
+                    (uri.Host.ToLower().EndsWith("outlook.office.com") && uri.AbsolutePath.Contains("/safelink.html"))
                     )
                 {
                     var nurl = HttpUtility.ParseQueryString(uri.Query)?.Get("url");
