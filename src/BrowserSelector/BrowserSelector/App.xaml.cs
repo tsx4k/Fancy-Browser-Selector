@@ -43,7 +43,19 @@ namespace BrowserSelector
         {
             if(e.Args.Count() >= 1)
             {
-                var selectorWindow = new Views.SelectorWindow(e.Args[0]);
+                var url = string.Empty;
+                var options = string.Empty;
+
+                if(e.Args[0].StartsWith("-"))
+                {
+                    options = e.Args[0];
+                    url = e.Args.Count() >= 2 ? e.Args[0] : string.Empty;
+                } else
+                {
+                    url = e.Args[0];
+                }
+
+                var selectorWindow = new Views.SelectorWindow(url, options);
                 MainWindow = selectorWindow;
                 await selectorWindow.DetectShowableAsync();
                 if(!selectorWindow.CanShow)

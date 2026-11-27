@@ -212,10 +212,15 @@ namespace BrowserSelectorCommon
             return RememberChoiceService.GetAllChoices(AppId);
         }
 
-        public static string RemoveTrackers(string url, out List<string> result)
+        public static string RemoveTrackers(string url, out List<Tracker> result, List<string> except = null)
         {
-            return TrackersService.RemoveTrackers(url, out result);
+            return TrackersService.RemoveTrackers(url, out result, except);
         }
+        public static List<Tracker> FindTrackers(string url)
+        {
+            return TrackersService.FindTrackers(url);
+        }
+
 
         public static string PrepareUrl(string url)
         {

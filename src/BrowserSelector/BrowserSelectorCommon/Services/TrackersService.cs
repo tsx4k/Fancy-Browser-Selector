@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
+using BrowserSelectorCommon.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -39,9 +40,11 @@ namespace BrowserSelectorCommon.Services
 {
     internal class TrackersService
     {
-        internal static string RemoveTrackers(string url, out List<string> result)
+        static List<Tracker> _knownTrackers = null;
+
+        internal static string RemoveTrackers(string url, out List<Tracker> result, List<string> except = null)
         {
-            result = new List<string>();
+            result = new List<Tracker>();
             var knowTrackers = GetKnownTrackers();
 
             try
@@ -54,10 +57,10 @@ namespace BrowserSelectorCommon.Services
                 {
                     try
                     {
-                        var tracker = knowTrackers.Find(x => x.Item1 == key);
-                        if(tracker != null)
+                        var tracker = knowTrackers.Find(x => x.Key == key);
+                        if(tracker != null && (except == null || !except.Contains(key)))
                         {
-                            result.Add($"{tracker.Item2} ({tracker.Item1})");
+                            result.Add(tracker);
                         } else
                         {
                             newQuery += $"&{key}={query.Get(key)}";
@@ -74,31 +77,64 @@ namespace BrowserSelectorCommon.Services
             return null;
         }
 
-        private static List<Tuple<string, string>> GetKnownTrackers()
+        internal static List<Tracker> FindTrackers(string url)
         {
-            List<Tuple<string, string>> knownTrackers = new List<Tuple<string, string>>();
+            var result = new List<Tracker>();
+            var knowTrackers = GetKnownTrackers();
+
+            try
+            {
+                Uri uri = new Uri(url);
+                var query = HttpUtility.ParseQueryString(uri.Query);
+                bool fine = true;
+                foreach (var key in query.AllKeys)
+                {
+                    try
+                    {
+                        var tracker = knowTrackers.Find(x => x.Key == key);
+                        if (tracker != null)
+                        {
+                            result.Add(tracker);
+                        }
+                    }
+                    catch { fine = false; }
+                }
+                if (fine)
+                {
+                    return result;
+                }
+            }
+            catch { }
+            return null;
+        }
+
+
+        private static List<Tracker> GetKnownTrackers()
+        {
+            if (_knownTrackers != null && _knownTrackers.Count > 0)
+                return _knownTrackers;
+
+            List<Tracker> knownTrackers = new List<Tracker>();
 
             /*
              * source: https://raw.githubusercontent.com/mpchadwick/tracking-query-params-registry/master/_data/params.csv
-name,platform,confirmed_in,unique_per_visitor
-fbclid,Facebook,,
-gclid, Google AdWords / Google Analytics,https://support.google.com/searchads/answer/6292795,
-gclsrc, Google DoubleClick,https://support.google.com/searchads/answer/6292795,
-utm_content, Google Analytics,,
-utm_term, Google Analytics,,
-utm_campaign, Google Analytics,,
-utm_medium, Google Analytics,,
-utm_source, Google Analytics,,
-utm_id, Google Analytics, https://support.google.com/urchin/answer/2633697,
-_ga, Google Analytics,,
+            name,platform,confirmed_in,unique_per_visitor
+            fbclid,Facebook,,
+            gclid, Google AdWords / Google Analytics,https://support.google.com/searchads/answer/6292795,
+            gclsrc, Google DoubleClick,https://support.google.com/searchads/answer/6292795,
+            utm_content, Google Analytics,,
+            utm_term, Google Analytics,,
+            utm_campaign, Google Analytics,,
+            utm_medium, Google Analytics,,
+            utm_source, Google Analytics,,
+            utm_id, Google Analytics, https://support.google.com/urchin/answer/2633697,
+            _ga, Google Analytics,,
             ... etc.
             */
 
-            //var auxList = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceNames();
-            // "BrowserSelectorCommon.Services.TrackersRepository.trackers20230330.csv"
             try
             {
-                using (Stream s = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("BrowserSelectorCommon.Services.TrackersRepository.trackers20230330.csv"))
+                using (Stream s = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("BrowserSelectorCommon.Services.TrackersRepository.trackers.csv"))
                 {
                     TextReader reader = new StreamReader(s);
                     string line = null;
@@ -110,10 +146,13 @@ _ga, Google Analytics,,
                         if (string.IsNullOrEmpty(line) || index == 0) { continue; }
 
                         string[] trackerInfo = line.Split(',');
-                        knownTrackers.Add(new Tuple<string, string>(trackerInfo[0].Trim(), trackerInfo[1].Trim()));
+                        knownTrackers.Add(new Tracker(trackerInfo[0].Trim(), trackerInfo[1].Trim()));
                     } while (line != null);
                 }
             } catch { }
+
+            _knownTrackers = knownTrackers;
+
             return knownTrackers;
         }
     }

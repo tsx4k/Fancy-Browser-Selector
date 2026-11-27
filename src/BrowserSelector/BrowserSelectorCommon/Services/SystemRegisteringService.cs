@@ -105,6 +105,8 @@ namespace BrowserSelectorCommon.Services
 
             appReg.SetValue("", appName);
             appReg.CreateSubKey(string.Format("shell\\open\\command", appId)).SetValue("", $"\"{appPath}\"");
+            appReg.CreateSubKey(string.Format("shell\\properties\\command", appId)).SetValue("", $"\"{appPath}\" --properties"); // required by Win11 & Outlook
+            appReg.CreateSubKey(string.Format("shell\\safemode\\command", appId)).SetValue("", $"\"{appPath}\" --safemode"); // required by Win11 & Outlook
             appReg.CreateSubKey(string.Format("DefaultIcon", appId)).SetValue("", $"{appPath},0");
 
 

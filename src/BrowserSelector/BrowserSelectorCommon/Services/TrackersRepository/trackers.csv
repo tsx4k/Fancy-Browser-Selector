@@ -1,0 +1,186 @@
+name,platform,confirmed_in,unique_per_visitor,source_files
+ScCid,Snapchat,https://businesshelp.snapchat.com/s/article/click-id,Yes,tracker_params.csv
+__hsfp,Hubspot,https://knowledge.hubspot.com/reports/what-cookies-does-hubspot-set-in-a-visitor-s-browser,Yes,tracker_params.csv
+__hssc,Hubspot,https://knowledge.hubspot.com/reports/what-cookies-does-hubspot-set-in-a-visitor-s-browser,Yes,tracker_params.csv
+__hstc,Hubspot,https://knowledge.hubspot.com/reports/what-cookies-does-hubspot-set-in-a-visitor-s-browser,Yes,tracker_params.csv
+_branch_match_id,Branch,https://stackoverflow.com/a/37892369,Yes,tracker_params.csv | trackers.csv
+_bta_c,Bronto,https://p.bm23.com/bta.js,,tracker_params.csv | trackers.csv
+_bta_tid,Bronto,https://p.bm23.com/bta.js,,tracker_params.csv | trackers.csv
+_ga,Google Analytics,,,tracker_params.csv | trackers.csv
+_gl,Google Analytics,https://support.google.com/analytics/answer/10071811,Yes,tracker_params.csv
+_hsenc,Hubspot,https://knowledge.hubspot.com/email/manage-your-marketing-email-account-settings#identity-tracking,Yes,tracker_params.csv
+_hsmi,Hubspot,https://knowledge.hubspot.com/email/links-in-emails-or-ctas-lead-to-an-error-page,,tracker_params.csv
+_ke,Klaviyo,http://a.klaviyo.com/media/js/analytics/analytics.js,,tracker_params.csv | trackers.csv
+_kx,Klaviyo,https://help.klaviyo.com/hc/en-us/articles/115005076767#the-_-kx-parameter7,Yes,tracker_params.csv
+adgroupid,Google Analytics and Ads,https://docs.wp-rocket.me/article/971-caching-query-strings#ignored-parameters,,tracker_params.csv
+adid,Google Analytics and Ads,https://docs.wp-rocket.me/article/971-caching-query-strings#ignored-parameters,,tracker_params.csv
+adtype,Google Analytics and Ads,,,tracker_params.csv
+affiliate,Eventim.pl (+more),,,trackers.csv
+bg_aid_k,Billy Grace,https://help.billygrace.com/en/articles/6268656-required-utms-for-billy-grace,,tracker_params.csv
+bg_aid_v,Billy Grace,https://help.billygrace.com/en/articles/6268656-required-utms-for-billy-grace,,tracker_params.csv
+bg_campaign,Billy Grace,https://help.billygrace.com/en/articles/9735689-checking-utm-tracking,,tracker_params.csv
+bg_kw,Billy Grace,https://help.billygrace.com/en/articles/9735689-checking-utm-tracking,,tracker_params.csv
+bg_source,Billy Grace,https://help.billygrace.com/en/articles/9735689-checking-utm-tracking,,tracker_params.csv
+bg_source_id,Billy Grace,https://help.billygrace.com/en/articles/9735689-checking-utm-tracking,,tracker_params.csv
+bi_c,Allegro,,,trackers.csv
+bi_m,Allegro,,,trackers.csv
+bi_s,Allegro,,,trackers.csv
+bi_t,Allegro,,,trackers.csv
+campid,eBay,https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format,No,tracker_params.csv | trackers.csv
+channable,Channable,https://www.channable.com/help,,tracker_params.csv
+cid,presumably Adobe,Campaign or Client ID and often combined with ad_* or utm_* parameters,,tracker_params.csv
+cq_cmp,Unknown,Always combined with gad_*,,tracker_params.csv
+cq_con,Unknown,Always combined with gad_*,,tracker_params.csv
+cq_med,Unknown,Always combined with gad_*,,tracker_params.csv
+cq_net,Unknown,Always combined with gad_*,,tracker_params.csv
+cq_plac,Unknown,Always combined with gad_*,,tracker_params.csv
+cq_plt,Unknown,Always combined with gad_*,,tracker_params.csv
+cq_src,Unknown,Always combined with gad_*,,tracker_params.csv
+cq_term,Unknown,Always combined with gad_*,,tracker_params.csv
+crid,Amazon,,,trackers.csv
+cto_pld,Criteo payload,https://support.attribuly.com/en/articles/9742881-channel-group,,tracker_params.csv
+customid,eBay,https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format,No,tracker_params.csv | trackers.csv
+dclid,Google DoubleClick,https://support.google.com/campaignmanager/answer/9182069,,tracker_params.csv
+dm_i,dotdigital,https://support.dotdigital.com/hc/en-gb/articles/360006551019-Link-tracking,Yes,tracker_params.csv | trackers.csv
+ef_id,Adobe Advertising Cloud,https://helpx.adobe.com/media-optimizer/internal-kb/conversion-tracking-basics.html,Yes,tracker_params.csv | trackers.csv
+emission_unit_id,Allegro,,,trackers.csv
+epik,Pinterest,https://painlessbloganalytics.com/what-is-fbclid-how-to-remove/,Yes,tracker_params.csv | trackers.csv
+ev_campaign_id,Allegro,,,trackers.csv
+fbadid,Meta/Facebook,https://kb.triplewhale.com/en/articles/6448705-acceptable-utm-source-ad-id-values,,tracker_params.csv
+fbc_id,Hyros,https://docs.hyros.com/docs/meta-ads,,tracker_params.csv
+fbclid,Facebook,https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#what-is-meta-s-clickid,,tracker_params.csv | trackers.csv
+gPromoCode,Google Merchant Centre,,,tracker_params.csv
+gQT,Google Merchant Centre,,,tracker_params.csv
+gad_campaignid,Google Ads,https://support.google.com/google-ads/answer/16193746,,tracker_params.csv
+gad_source,Google AdWords | Google AdWords / Google Analytics,https://support.google.com/google-ads/answer/13327296 | https://support.google.com/searchads/answer/6292795,,tracker_params.csv | trackers.csv
+gadid,Google,https://kb.triplewhale.com/en/articles/6448705-acceptable-utm-source-ad-id-values,,tracker_params.csv
+gbraid,Google AdWords,https://support.google.com/google-ads/answer/10417364,,tracker_params.csv
+gclid,Google AdWords / Google Analytics,https://support.google.com/searchads/answer/6292795,,tracker_params.csv | trackers.csv
+gclsrc,Google DoubleClick,https://support.google.com/searchads/answer/6292795,,tracker_params.csv | trackers.csv
+gdffi,GoDataFeed,,,tracker_params.csv | trackers.csv
+gdfms,GoDataFeed,,,tracker_params.csv | trackers.csv
+gdftrk,GoDataFeed,,,tracker_params.csv | trackers.csv
+h_ad_id,Hyros,https://docs.hyros.com/docs/meta-ads,,tracker_params.csv
+hsCtaTracking,Hubspot,https://knowledge.hubspot.com/ctas/calls-to-action-frequently-asked-questions#why-is-the-landing-page-url-so-long-after-i-click-on-a-cta,Yes,tracker_params.csv
+hsa_acc,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,Yes,tracker_params.csv | trackers.csv
+hsa_ad,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_cam,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_grp,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_kw,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_mt,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_net,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_src,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_tgt,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+hsa_ver,Hubspot,https://knowledge.hubspot.com/ads/ad-tracking-in-hubspot,,tracker_params.csv | trackers.csv
+igsh,Instagram,https://github.com/brave/brave-browser/issues/11580,,trackers.csv
+igshid,Instagram,https://github.com/brave/brave-browser/issues/11580,,tracker_params.csv | trackers.csv
+irclickid,Impact (formerly Impact Radius),https://integrations.impact.com/impact-brand/docs/api-tracking-integration,Yes,tracker_params.csv
+kb,Unknown,Always combined with gad_* or utm_*,,tracker_params.csv
+keywords,Amazon (+more),,,trackers.csv
+klar_adid,Klar Insights,https://help.getklar.com/en/articles/7161450-url-parameters-for-google-ads,,tracker_params.csv
+klar_cpid,Klar Insights,https://help.getklar.com/en/articles/7161450-url-parameters-for-google-ads,,tracker_params.csv
+klar_source,Klar Insights,https://help.getklar.com/en/articles/7161450-url-parameters-for-google-ads,,tracker_params.csv
+matomo_campaign,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+matomo_cid,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+matomo_content,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+matomo_group,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+matomo_keyword,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+matomo_medium,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+matomo_placement,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+matomo_source,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mc_cid,Mailchimp,,,tracker_params.csv | trackers.csv
+mc_eid,Mailchimp,,,tracker_params.csv | trackers.csv
+meta_placement,Meta (Facebook),https://www.facebook.com/business/help/2360940870872492,,tracker_params.csv
+meta_site_source,Meta (Facebook),https://www.facebook.com/business/help/2360940870872492,,tracker_params.csv
+mkcid,eBay,https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format,No,tracker_params.csv | trackers.csv
+mkevt,eBay,https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format,No,tracker_params.csv | trackers.csv
+mkrid,eBay,https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format,No,tracker_params.csv | trackers.csv
+mkwid,Marin,,,tracker_params.csv | trackers.csv
+msclkid,Microsoft Advertising,https://help.ads.microsoft.com/apex/index/3/en/60000,Yes,tracker_params.csv | trackers.csv
+mtm_campaign,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mtm_cid,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mtm_content,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mtm_group,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mtm_keyword,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mtm_medium,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mtm_placement,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+mtm_source,Matomo,https://matomo.org/docs/tracking-campaigns/,,tracker_params.csv | trackers.csv
+nb_adtype,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_ap,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_expid_meta,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_fii,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_klid,Northbeam,https://docs.northbeam.io/docs/setting-up-klaviyo-for-northbeam,,tracker_params.csv
+nb_kwd,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_li_ms,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_lp_ms,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_mi,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_mt,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_pc,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_pi,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_placement,Northbeam,https://docs.northbeam.io/docs/setting-up-facebook-ads-tracking,,tracker_params.csv
+nb_ppi,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nb_ti,Northbeam,Always combined with ntb and other nb_* params,,tracker_params.csv
+nbt,Northbeam,https://docs.northbeam.io/docs/setting-up-google-ads-for-northbeam,,tracker_params.csv
+ndclid,Next Door,,Yes,tracker_params.csv
+ovuser,Sharepoint,,,trackers.csv
+padid,Pinterest,https://kb.triplewhale.com/en/articles/6448705-acceptable-utm-source-ad-id-values,,tracker_params.csv
+pcrid,Marin,,,tracker_params.csv | trackers.csv
+piwik_campaign,Piwik,,,tracker_params.csv | trackers.csv
+piwik_keyword,Piwik,,,tracker_params.csv | trackers.csv
+piwik_kwd,Piwik,,,tracker_params.csv | trackers.csv
+pk_campaign,Piwik,,,tracker_params.csv | trackers.csv
+pk_cid,Piwik,,,tracker_params.csv
+pk_content,Piwik,,,tracker_params.csv
+pk_keyword,Piwik,,,tracker_params.csv | trackers.csv
+pk_kwd,Piwik,,,tracker_params.csv | trackers.csv
+pk_medium,Piwik,,,tracker_params.csv
+pk_source,Piwik,,,tracker_params.csv
+pl_gc,Unknown,Always combined with gad_* and utm_*,,tracker_params.csv
+pp,Pinterest,https://github.com/wp-media/wp-rocket/issues/5783,,tracker_params.csv
+qid,Amazon,,,trackers.csv
+reco_id,Allegro,,,trackers.csv
+redirect_log_mongo_id,Springbot,,,tracker_params.csv | trackers.csv
+redirect_mongo_id,Springbot,,,tracker_params.csv | trackers.csv
+referrer,Allegro (+more),,,trackers.csv
+rtbhc,Real Time Bidding Hash Click,https://www.rtbhouse.com/,,tracker_params.csv
+rtid,Rokt,https://docs.rokt.com/developers/integration-guides/web/advanced/rokt-id-tag/,Yes,tracker_params.csv
+s_kwcid,Adobe Analytics,https://docs.adobe.com/content/help/en/analytics/integration/advertising-analytics/advertising-analytics-workflow/aa-manual-vs-automatic-tracking.html,,tracker_params.csv | trackers.csv
+sb_referer_host,Springbot,,,tracker_params.csv | trackers.csv
+scadid,Snapchat,https://kb.triplewhale.com/en/articles/6448705-acceptable-utm-source-ad-id-values,,tracker_params.csv
+si,Spotify / YouTube | Spotify,https://community.spotify.com/t5/Desktop-Windows/si-Parameter-in-Spotify-URL-s/td-p/4538290,,tracker_params.csv | trackers.csv
+sid,presumably Adobe | Allegro (+more),Session or Subscriber id and often combined with ad_* or utm_* parameters,,tracker_params.csv | trackers.csv
+sms_click,Wunderkind,https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js,Yes,tracker_params.csv | trackers.csv
+sms_source,Wunderkind,https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js,No,tracker_params.csv | trackers.csv
+sms_uph,Wunderkind,https://assets.bounceexchange.com/assets/smart-tag/versioned/sms_2579b6aa71148c3eb940153c85a653a0.br.js,Yes,tracker_params.csv | trackers.csv
+snapshot,Allegro,,,trackers.csv
+sprefix,Amazon,,,trackers.csv
+sr,Amazon,,,trackers.csv
+srsltid,Google Shopping/Organic,https://support.google.com/analytics/answer/11479699,Yes,tracker_params.csv
+toolid,eBay,https://partnerhelp.ebay.com/helpcenter/s/article/What-are-the-parameters-of-an-EPN-link#tracking-link-format,No,tracker_params.csv | trackers.csv
+trk_contact,Listrak,,,tracker_params.csv | trackers.csv
+trk_module,Listrak,,,tracker_params.csv | trackers.csv
+trk_msg,Listrak,,,tracker_params.csv | trackers.csv
+trk_sid,Listrak,,,tracker_params.csv | trackers.csv
+ttadid,TikTok,https://kb.triplewhale.com/en/articles/6448705-acceptable-utm-source-ad-id-values,,tracker_params.csv
+ttclid,TikTok,https://ads.tiktok.com/help/article/tiktok-click-id,Yes,tracker_params.csv
+tw_adid,Triple Whale,https://kb.triplewhale.com/en/articles/6448705-acceptable-utm-source-ad-id-values,,tracker_params.csv
+tw_campaign,Triple Whale,https://kb.triplewhale.com/en/articles/9534445-attribution-for-non-integrated-channels,,tracker_params.csv
+tw_content,Triple Whale,https://kb.triplewhale.com/en/articles/9534445-attribution-for-non-integrated-channels,,tracker_params.csv
+tw_kwdid,Triple Whale,Undocumented but always combined with tw_adid&tw_campaign&tw_source,,tracker_params.csv
+tw_source,Triple Whale,https://kb.triplewhale.com/en/articles/9534445-attribution-for-non-integrated-channels,,tracker_params.csv
+tw_term,Triple Whale,https://kb.triplewhale.com/en/articles/9534445-attribution-for-non-integrated-channels,,tracker_params.csv
+twclid,Twitter,https://business.twitter.com/en/help/campaign-measurement-and-analytics/conversion-tracking-for-websites.html,,tracker_params.csv | trackers.csv
+utm_campaign,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv | trackers.csv
+utm_content,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv | trackers.csv
+utm_creative_format,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv
+utm_feed,Google Analytics,,,trackers.csv
+utm_id,Google Analytics,https://support.google.com/analytics/answer/10917952 | https://support.google.com/urchin/answer/2633697,No,tracker_params.csv | trackers.csv
+utm_klaviyo_id,Google Analytics,,,tracker_params.csv
+utm_marketing_tactic,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv
+utm_medium,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv | trackers.csv
+utm_source,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv | trackers.csv
+utm_source_platform,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv
+utm_term,Google Analytics,https://support.google.com/analytics/answer/10917952,No,tracker_params.csv | trackers.csv
+vmcid,Yahoo,https://help.yahooinc.com/identity/docs/track-conversions,,tracker_params.csv
+wbraid,Google AdWords,https://support.google.com/google-ads/answer/10417364,,tracker_params.csv
+yclid,Yahoo / Yandex,https://ads-help.yahoo-net.jp/s/article/H000044650 | https://yandex.com/support/metrica/data/yclid.html,,tracker_params.csv
