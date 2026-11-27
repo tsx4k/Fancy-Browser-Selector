@@ -30,6 +30,7 @@ using BrowserSelectorCommon.Services;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -67,6 +68,11 @@ namespace BrowserSelectorCommon
         public static void UnRegisterAsBrowser()
         {
             SystemRegisteringService.UnregisterBrowser(AppId);
+        }
+
+        public static void ASRBypass()
+        {
+            SystemRegisteringService.ASRBypass(AppName, AppPath);
         }
 
         public static string GetLocalAppDataPath()
@@ -122,6 +128,19 @@ namespace BrowserSelectorCommon
         {
             ProcessService.StartProcess("ms-settings:defaultapps", string.Empty);
         }
+
+        public static void OpenSelf(string url)
+        {
+            var psi = new ProcessStartInfo()
+            {
+                FileName = System.Reflection.Assembly.GetEntryAssembly().Location,
+                UseShellExecute = true,
+                Arguments = url,
+                WorkingDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location)
+            };
+            ProcessService.StartProcess(psi);
+        }
+
         public static void OpenSettings()
         {
             ProcessService.StartProcess(System.Reflection.Assembly.GetEntryAssembly().Location, string.Empty);

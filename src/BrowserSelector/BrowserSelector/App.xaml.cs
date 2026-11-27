@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -58,6 +59,15 @@ namespace BrowserSelector
                 if (options.Contains("--properties"))
                 {
                     BrowserSelectorCommon.Common.OpenSettings();
+                    Application.Current.Shutdown();
+                    return;
+                }
+
+                // like Firefox & OS Integration Signaling, Open -> re-run as shellexecute -> fast close to safe parse the input url and avoid Defender's child-process-block: -osint -url "%1"
+                if (options.Contains("-osint"))
+                {
+                    url = e.Args.Count() >= 3 && e.Args[1] == "-url" ? e.Args[2] : string.Empty;
+                    BrowserSelectorCommon.Common.OpenSelf(url);
                     Application.Current.Shutdown();
                     return;
                 }

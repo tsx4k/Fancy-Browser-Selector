@@ -28,10 +28,12 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BrowserSelectorCommon.Services
 {
@@ -105,8 +107,8 @@ namespace BrowserSelectorCommon.Services
 
             appReg.SetValue("", appName);
             appReg.CreateSubKey(string.Format("shell\\open\\command", appId)).SetValue("", $"\"{appPath}\"");
-            appReg.CreateSubKey(string.Format("shell\\properties\\command", appId)).SetValue("", $"\"{appPath}\" --properties"); // required by Win11 & Outlook
-            appReg.CreateSubKey(string.Format("shell\\safemode\\command", appId)).SetValue("", $"\"{appPath}\" --safemode"); // required by Win11 & Outlook
+            appReg.CreateSubKey(string.Format("shell\\properties\\command", appId)).SetValue("", $"\"{appPath}\" --properties"); // required by Win11
+            appReg.CreateSubKey(string.Format("shell\\safemode\\command", appId)).SetValue("", $"\"{appPath}\" --safemode"); // required by Win11
             appReg.CreateSubKey(string.Format("DefaultIcon", appId)).SetValue("", $"{appPath},0");
 
 
@@ -120,7 +122,7 @@ namespace BrowserSelectorCommon.Services
             handlerReg.SetValue("", appName);
             handlerReg.SetValue("FriendlyTypeName", appName);
 
-            handlerReg.CreateSubKey(string.Format("shell\\open\\command", appId)).SetValue("", $"\"{appPath}\" \"%1\"");
+            handlerReg.CreateSubKey(string.Format("shell\\open\\command", appId)).SetValue("", $"\"{appPath}\" -osint -url \"%1\""); // run fast, re-run itself, close to avoid Defender's child processes blocking rules
             handlerReg.CreateSubKey(string.Format("DefaultIcon", appId)).SetValue("", $"{appPath},0");
         }
 
@@ -159,6 +161,48 @@ namespace BrowserSelectorCommon.Services
                 Registry.CurrentUser.DeleteSubKeyTree(string.Format("SOFTWARE\\Classes\\{0}URL", appId));
             } catch { }
 
+        }
+
+        internal static void ASRBypass(string appName, string appPath)
+        {
+            MessageBoxResult result = MessageBox.Show(Application.Current.MainWindow,
+                $"In case when you can't open links in Outlook or other app managed by your IT department, there's a way to bypass the ASR as Admin and allow {appName} to be started as a child process.\n" +
+                $"Do you want to proceed?",
+                $"{appName} ASR Bypass",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+            if (result != MessageBoxResult.Yes) return;
+
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -AttackSurfaceReductionOnlyExclusions '{appPath}'\"",
+                    UseShellExecute = true,
+                    Verb = "runas",
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+
+                using (Process process = Process.Start(psi))
+                {
+                    process?.WaitForExit();
+
+                    if (process != null && process.ExitCode == 0)
+                    {
+                        MessageBox.Show(Application.Current.MainWindow, "ASR exclusion has been added succesfully.", appName, MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Application.Current.MainWindow, $"ASR exclusion failed, error code: {process?.ExitCode}", appName, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                MessageBox.Show($"ASR exclusion cancelled by the user.", appName, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         internal static void SetAsDefault(string appId)
