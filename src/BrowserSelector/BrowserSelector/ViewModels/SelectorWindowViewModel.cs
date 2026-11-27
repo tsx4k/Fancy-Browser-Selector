@@ -28,6 +28,7 @@ using BrowserSelector.Properties;
 using BrowserSelector.Relay;
 using BrowserSelector.Views;
 using BrowserSelectorCommon.Interfaces;
+using BrowserSelectorCommon.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -57,6 +58,8 @@ namespace BrowserSelector.ViewModels
 
         public ObservableCollection<IBrowser> Browsers { get { return ocbrowsers; } set { ocbrowsers = value; OnPropertyChanged("Browsers"); } }
 
+        public string Options { get; set; }
+
         public string Title => $"{BrowserSelectorCommon.Common.AppName}";
 
         private string _url = null;
@@ -64,6 +67,9 @@ namespace BrowserSelector.ViewModels
 
         private string _originalUrl = null;
         public string OriginalURL { get { return _originalUrl; } set { _originalUrl = value; OnPropertyChanged("OriginalURL"); } }
+
+        private string _urlForTrackersService = null;
+        public string URLForTrackersService { get { return _urlForTrackersService; } set { _urlForTrackersService = value; OnPropertyChanged("URLForTrackersService"); } }
 
         private bool _urlIsStripped = false;
         public bool UrlIsStripped { get { return _urlIsStripped; } set { _urlIsStripped = value; OnPropertyChanged("UrlIsStripped"); } }
@@ -73,6 +79,8 @@ namespace BrowserSelector.ViewModels
         public ICommand CloseCommand { get; private set; }
         public ICommand EditCommentCommand { get; private set; }
         public ICommand SettingsCommand { get; private set; }
+        public ICommand SafelinkCommand { get; private set; }
+        public ICommand TrackersCommand { get; private set; }
 
         public Window Window { get; set; }
 
@@ -87,6 +95,10 @@ namespace BrowserSelector.ViewModels
 
         private string _urlTrackersInfo = null;
         public string UrlTrackersInfo { get { return _urlTrackersInfo; } set { _urlTrackersInfo = value; OnPropertyChanged("UrlTrackersInfo"); } }
+
+        private List<Tracker> _urlTrackersData = null;
+        public List<Tracker> UrlTrackersData { get { return _urlTrackersData; } set { _urlTrackersData = value; OnPropertyChanged("UrlTrackersData"); } }
+
 
         private bool _canRememberChoice = false;
         public bool CanRememberChoice { get { return _canRememberChoice; } set { _canRememberChoice = value; OnPropertyChanged("CanRememberChoice"); } }
@@ -104,6 +116,8 @@ namespace BrowserSelector.ViewModels
             CloseCommand = new RelayCommand(Close);
             EditCommentCommand = new RelayCommand(EditComment);
             SettingsCommand = new RelayCommand(OpenSettings);
+            SafelinkCommand = new RelayCommand(OpenSafelinkPopup);
+            TrackersCommand = new RelayCommand(OpenTrackersPopup);
 
             PrepareBrowsersList();
         }
@@ -189,6 +203,19 @@ namespace BrowserSelector.ViewModels
             button.Appearance = Wpf.Ui.Controls.ControlAppearance.Success;
             button.Icon = Wpf.Ui.Common.SymbolRegular.Checkmark32;
             button.Background = new SolidColorBrush(Colors.Green);
+        }
+
+
+        private void OpenTrackersPopup(object obj)
+        {
+            var window = (SelectorWindow)Window;
+            //window.trackersPopup.IsOpen = true;
+        }
+
+        private void OpenSafelinkPopup(object obj)
+        {
+            var window = (SelectorWindow)Window;
+            //window.safelinkPopup.IsOpen = true;
         }
     }
 }

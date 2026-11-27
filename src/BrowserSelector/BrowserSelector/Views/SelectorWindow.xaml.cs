@@ -42,6 +42,7 @@ using Wpf.Ui.Controls.Window;
 using BrowserSelector.ViewModels;
 using BrowserSelectorCommon.Interfaces;
 using System.Security.Policy;
+using BrowserSelectorCommon.Models;
 
 namespace BrowserSelector.Views
 {
@@ -53,13 +54,14 @@ namespace BrowserSelector.Views
         SelectorWindowViewModel model;
         bool firstPrepare = true;
         private int SplashScreenDuration = 2000; // ms
+        private int CloseDelay = 2000; // ms
         public bool CanShow { get; set; } = true;
 
-        public SelectorWindow(string url)
+        public SelectorWindow(string url, string optons)
         {
             InitializeComponent();
             url = BrowserSelectorCommon.Common.PrepareUrl(url);
-            DataContext = model = new ViewModels.SelectorWindowViewModel(this) { URL = url, OriginalURL = url };
+            DataContext = model = new ViewModels.SelectorWindowViewModel(this) { URL = url, OriginalURL = url, Options = optons };
             model.ApplyTheme();
         }
 
@@ -70,6 +72,7 @@ namespace BrowserSelector.Views
 
         public void OpenBrowser(object sender)
         {
+            var vm = ((SelectorWindowViewModel)DataContext);
             IBrowser browser = sender as IBrowser;
             ListBox listBox = sender as ListBox;
             if (listBox == null)
@@ -92,8 +95,16 @@ namespace BrowserSelector.Views
                 {
                     BrowserSelectorCommon.Common.RemoveChoiceByUrl(model.URL);
                 }
-                BrowserSelectorCommon.Common.OpenBrowser(browser, ((SelectorWindowViewModel)DataContext).URL);
+                BrowserSelectorCommon.Common.OpenBrowser(browser, vm.URL);
+
+                DelayedClose();
             }
+        }
+
+        private async void DelayedClose()
+        {
+            await Task.Delay(CloseDelay);
+            Close();
         }
 
         private void UiWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -113,6 +124,8 @@ namespace BrowserSelector.Views
             model.ApplyTheme();
             model.PrepareBrowsersList(true);
 
+            var vm = ((SelectorWindowViewModel)DataContext);
+
             if (!firstPrepare)
             {
 
@@ -127,7 +140,7 @@ namespace BrowserSelector.Views
                 var progid = BrowserSelectorCommon.Common.GetLastSelectedBrowser();
 
                 // URL features
-                var url = ((SelectorWindowViewModel)DataContext).URL;
+                var url = vm.URL;
                 var urlForLearning = url;
                 if (BrowserSelectorCommon.Common.IsSafeLink(url, out string originalUrl))
                 {
@@ -135,8 +148,8 @@ namespace BrowserSelector.Views
                     if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_STRIP_SAFELINKS) ?? "false"))
                     {
                         url = originalUrl;
-                        ((SelectorWindowViewModel)DataContext).URL = url;
-                        ((SelectorWindowViewModel)DataContext).UrlIsStripped = true;
+                        vm.URL = url;
+                        vm.UrlIsStripped = true;
                     }
 
                     // Handle Safelinks for Learning
@@ -158,26 +171,13 @@ namespace BrowserSelector.Views
 
 
                 // Find Trackers
-                var nurl = BrowserSelectorCommon.Common.RemoveTrackers(url, out List<string> result);
-                if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_REMOVE_TRACKERS) ?? "false"))
-                {
-                    if (!string.IsNullOrEmpty(nurl) && result.Count > 0)
-                    {
-                        url = nurl;
-                        ((SelectorWindowViewModel)DataContext).URL = url;
-                        ((SelectorWindowViewModel)DataContext).UrlHasTrackersRemoved = true;
-                    }
-                }
-                ((SelectorWindowViewModel)DataContext).UrlHasTrackersFound = result.Count > 0;
-                ((SelectorWindowViewModel)DataContext).UrlTrackersFound = result.Count;
-                var trackersInfo = string.Empty;
-                result.ForEach(x => trackersInfo += $"{x}\r\n");
-                ((SelectorWindowViewModel)DataContext).UrlTrackersInfo = trackersInfo;
+                url = HandleTrackers(url);
+
 
                 if (!string.IsNullOrEmpty(progid))
                 {
                     int index = -1;
-                    foreach (var x in ((SelectorWindowViewModel)DataContext).Browsers)
+                    foreach (var x in vm.Browsers)
                     {
                         index++;
                         if (x.ProgId == progid)
@@ -218,6 +218,36 @@ namespace BrowserSelector.Views
                 }
             }
             model.CanRememberChoice = bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_LEARN_HOSTS) ?? "false");
+        }
+
+        private string HandleTrackers(string url)
+        {
+            var vm = ((SelectorWindowViewModel)DataContext);
+
+            var trackers = BrowserSelectorCommon.Common.FindTrackers(url);
+
+            var except = new List<string>();
+            
+
+            var nurl = BrowserSelectorCommon.Common.RemoveTrackers(url, out List<Tracker> result, except);
+            if (bool.Parse(BrowserSelectorCommon.Common.GetSetting(BrowserSelectorCommon.Constants.Settings.SETTING_REMOVE_TRACKERS) ?? "false"))
+            {
+                if (!string.IsNullOrEmpty(nurl) && result.Count > 0)
+                {
+                    vm.URLForTrackersService = vm.URL;
+                    url = nurl;
+                    vm.URL = url;
+                    vm.UrlHasTrackersRemoved = true;
+                }
+            }
+            vm.UrlHasTrackersFound = trackers.Count > 0;
+            vm.UrlTrackersFound = trackers.Count;
+            var trackersInfo = string.Empty;
+            trackers.ForEach(x => trackersInfo += $"{x.Source} ({x.Key})\r\n");
+            vm.UrlTrackersInfo = trackersInfo;
+            vm.UrlTrackersData = trackers;
+
+            return url;
         }
 
         private async Task ShowSplashScreen(TimeSpan duration)
