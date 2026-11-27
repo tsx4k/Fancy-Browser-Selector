@@ -55,6 +55,13 @@ namespace BrowserSelector
                     url = e.Args[0];
                 }
 
+                if (options.Contains("--properties"))
+                {
+                    BrowserSelectorCommon.Common.OpenSettings();
+                    Application.Current.Shutdown();
+                    return;
+                }
+
                 var selectorWindow = new Views.SelectorWindow(url, options);
                 MainWindow = selectorWindow;
                 await selectorWindow.DetectShowableAsync();
