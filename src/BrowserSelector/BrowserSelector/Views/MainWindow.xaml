@@ -78,11 +78,11 @@ SOFTWARE.
                         </ui:Arc.LayoutTransform>
                     </ui:Arc>
                 </Canvas>
-                <Grid Margin="20,5,0,0" Height="120" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <Grid Margin="10,5,0,0" Height="120" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32" />
                         <ColumnDefinition Width="180" />
-                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="260" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -94,6 +94,7 @@ SOFTWARE.
                         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0" VerticalAlignment="Top" Margin="20,0,0,0">
                             <ui:Button Cursor="Hand" Content="Register" Command="{Binding RegisterAsBrowserCommand}"  />
                             <ui:Button Cursor="Hand" Content="Unregister" Command="{Binding UnRegisterAsBrowserCommand}" Margin="10,0,0,0" />
+                            <ui:Button Cursor="Hand" Content="ASR" Command="{Binding ASRBypassCommand}"  Margin="10,0,0,0" />
                         </StackPanel>
 
                         <Rectangle Grid.Column="0" Grid.Row="1" Fill="{Binding IsDefault, Converter={StaticResource BooleanToBrushConverter}, ConverterParameter='Lime,Red'}" Width="32" Height="32" VerticalAlignment="Top" />

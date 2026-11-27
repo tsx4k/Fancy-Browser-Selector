@@ -54,6 +54,7 @@ namespace BrowserSelector.ViewModels
         public ICommand RegisterAsBrowserCommand { get; private set; }
         public ICommand UnRegisterAsBrowserCommand { get; private set; }
         public ICommand OpenSettingsCommand { get; private set; }
+        public ICommand ASRBypassCommand { get; private set; }
 
         private int percent = 0;
         public int Percent { get { return percent; } set { if (percent != value) { percent = value; OnPropertyChanged("Percent"); } } }
@@ -127,6 +128,7 @@ namespace BrowserSelector.ViewModels
         {
             RegisterAsBrowserCommand = new RelayCommand(RegisterAsBrowser);
             UnRegisterAsBrowserCommand = new RelayCommand(UnRegisterAsBrowser);
+            ASRBypassCommand = new RelayCommand(ASRBypass);
             OpenSettingsCommand = new RelayCommand(OpenSettings);
 
             Initialize();
@@ -191,5 +193,11 @@ namespace BrowserSelector.ViewModels
         {
             BrowserSelectorCommon.Common.UnRegisterAsBrowser();
         }
+
+        private void ASRBypass(object obj)
+        {
+            BrowserSelectorCommon.Common.ASRBypass();
+        }
+
     }
 }
